@@ -67,9 +67,14 @@ with col1:
     st.link_button("WhatsApp Now: +92 300 7354339", wa_link)
 
 with col2:
-    st.success("Response time: within 24 hours")
-    st.info("Free revisions: 14 days")
-    st.warning("Custom quote only (no fixed pricing)")
+st.markdown("""
+<div class="ww-trust">
+<strong>✔ Response time:</strong> within 24 hours<br>
+<strong>✔ Free revisions:</strong> 14 days (same scope)<br>
+<strong>✔ Pricing:</strong> Custom quote only<br>
+<strong>✔ Service mode:</strong> Worldwide / Remote
+</div>
+""", unsafe_allow_html=True)
 
 st.divider()
 
@@ -89,3 +94,4 @@ st.divider()
 st.caption("WhatsApp: +92 300 7354339 • Worldwide / Remote Services")
 
 st.caption("We provide academic support, editing, formatting, and research enhancement services.")
+
