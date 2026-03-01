@@ -155,12 +155,18 @@ st.markdown(f'<a class="whatsapp-float" href="{wa_link}" target="_blank">Chat on
 
 st.write("")
 
-# ===================== TRUST / METRICS =====================
-m1, m2, m3, m4 = st.columns(4)
-with m1: st.metric("Specialists", "5")
-with m2: st.metric("Response", "≤ 24 hours")
-with m3: st.metric("Revisions", "14 days")
-with m4: st.metric("Mode", "Remote")
+# ===================== DOMAINS WE SUPPORT (TOP POSITION) =====================
+st.subheader("Domains We Support")
+
+st.markdown("""
+<span class="badge b-em">Business Studies</span>
+<span class="badge b-gd">Social Sciences</span>
+<span class="badge b-em">Education</span>
+<span class="badge b-in">Law</span>
+<span class="badge b-gd">Accounting</span>
+<span class="badge b-em">Finance</span>
+<span class="badge b-gd">Research Methodology</span>
+""", unsafe_allow_html=True)
 
 st.write("")
 
@@ -280,3 +286,4 @@ st.markdown("""
   Worldwide / Remote Services • Free revisions within 14 days • Response within 24 hours
 </div>
 """, unsafe_allow_html=True)
+
