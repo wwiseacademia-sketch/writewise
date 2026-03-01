@@ -1,6 +1,47 @@
 import streamlit as st
 import urllib.parse
-
+# --- Premium CSS (Light + Navy accent) ---
+st.markdown("""
+<style>
+/* Page width + typography */
+.block-container {padding-top: 1.2rem; padding-bottom: 2rem; max-width: 1100px;}
+h1, h2, h3 {letter-spacing: -0.02em;}
+/* Buttons */
+.stLinkButton a, .stButton>button {
+    border-radius: 12px !important;
+    padding: 0.55rem 0.9rem !important;
+    font-weight: 600 !important;
+}
+/* Card style */
+.ww-card {
+    background: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 16px;
+    padding: 16px 16px;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.04);
+}
+/* Trust bar */
+.ww-trust {
+    background: rgba(15, 23, 42, 0.03);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 14px;
+    padding: 12px 14px;
+}
+/* Small badge */
+.ww-badge {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.06);
+    border: 1px solid rgba(15, 23, 42, 0.10);
+    margin-right: 8px;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+/* Footer */
+.ww-footer {opacity: 0.75; font-size: 0.9rem; margin-top: 1.5rem;}
+</style>
+""", unsafe_allow_html=True)
 st.set_page_config(page_title="WriteWise Academic Help", layout="wide")
 
 # Top Header
@@ -46,4 +87,5 @@ st.table({
 st.divider()
 
 st.caption("WhatsApp: +92 300 7354339 • Worldwide / Remote Services")
+
 st.caption("We provide academic support, editing, formatting, and research enhancement services.")
