@@ -46,7 +46,17 @@ st.set_page_config(page_title="WriteWise Academic Help", layout="wide")
 
 # Top Header
 st.title("WriteWise Academic Help")
-st.caption("Professional Academic Support & Research Enhancement Services")
+st.divider()
+st.markdown("""
+<div class="ww-footer">
+<strong>WriteWise Academic Help</strong> • Worldwide / Remote Services<br>
+WhatsApp: <strong>+92 300 7354339</strong><br><br>
+<span style="opacity:0.85;">
+We provide academic support, editing, formatting, and research enhancement services.
+Free revisions within 14 days (same scope). Response within 24 hours.
+</span>
+</div>
+""", unsafe_allow_html=True)vices")
 st.divider()
 
 # WhatsApp Button
@@ -106,6 +116,7 @@ WriteWise Academic Help • WhatsApp: +92 300 7354339<br>
 Professional academic support, editing, formatting & research enhancement services.
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
