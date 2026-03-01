@@ -224,20 +224,6 @@ for i, (title, desc) in enumerate(why_points):
 
 st.write("")
 
-# ===================== DOMAINS (BADGES) =====================
-st.subheader("Domains We Support")
-st.markdown("""
-<span class="badge b-em">Business Studies</span>
-<span class="badge b-gd">Social Sciences</span>
-<span class="badge b-em">Education</span>
-<span class="badge b-in">Law</span>
-<span class="badge b-gd">Accounting</span>
-<span class="badge b-em">Finance</span>
-<span class="badge b-gd">Research Methodology</span>
-""", unsafe_allow_html=True)
-
-st.write("")
-
 # ===================== PROCESS =====================
 st.subheader("How It Works")
 p1, p2, p3 = st.columns(3)
@@ -286,4 +272,5 @@ st.markdown("""
   Worldwide / Remote Services • Free revisions within 14 days • Response within 24 hours
 </div>
 """, unsafe_allow_html=True)
+
 
