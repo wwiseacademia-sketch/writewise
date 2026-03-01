@@ -1,90 +1,151 @@
-# Premium CSS (Modern Colorful Theme)
+import streamlit as st
+import urllib.parse
+
+st.set_page_config(page_title="WriteWise Academic Help", layout="wide")
+
+# ------------------- MODERN COLORFUL THEME -------------------
 st.markdown("""
 <style>
-/* ---- Theme Variables ---- */
-:root{
-  --bg: #0b1220;
-  --surface: rgba(255,255,255,0.08);
-  --surface2: rgba(255,255,255,0.06);
-  --border: rgba(255,255,255,0.14);
-  --text: rgba(255,255,255,0.92);
-  --muted: rgba(255,255,255,0.72);
-  --primary: #22d3ee;   /* cyan */
-  --primary2:#60a5fa;   /* blue */
-  --chip: rgba(34,211,238,0.14);
-}
 
-/* ---- Page background ---- */
+/* ===== Background ===== */
 .stApp {
-  background: radial-gradient(1200px 800px at 10% 10%, rgba(96,165,250,0.20), transparent 55%),
-              radial-gradient(900px 700px at 85% 30%, rgba(34,211,238,0.18), transparent 55%),
-              linear-gradient(180deg, #0b1220 0%, #070b14 100%);
-  color: var(--text);
+    background: radial-gradient(circle at 20% 20%, #1e3a8a 0%, transparent 40%),
+                radial-gradient(circle at 80% 30%, #06b6d4 0%, transparent 40%),
+                linear-gradient(135deg, #0f172a 0%, #020617 100%);
+    color: white;
 }
 
-/* content width */
-.block-container {padding-top: 1.2rem; max-width: 1120px;}
-
-/* headings */
-h1, h2, h3, h4 { letter-spacing: -0.02em; color: var(--text); }
-p, li, div { color: var(--text); }
-
-/* Streamlit default text tweaks */
-[data-testid="stCaptionContainer"] { color: var(--muted) !important; }
-
-/* ---- Cards ---- */
-.ww-card{
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 16px 16px;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
-}
-.ww-trust{
-  background: linear-gradient(135deg, rgba(34,211,238,0.18), rgba(96,165,250,0.12));
-  border: 1px solid rgba(34,211,238,0.28);
-  border-radius: 18px;
-  padding: 14px 14px;
+/* Content Width */
+.block-container {
+    padding-top: 2rem;
+    max-width: 1100px;
 }
 
-/* ---- Domain badges ---- */
-.ww-badge{
-  display:inline-block;
-  padding:7px 12px;
-  border-radius:999px;
-  background: var(--chip);
-  border: 1px solid rgba(34,211,238,0.22);
-  margin: 6px 8px 0 0;
-  font-size: 0.92rem;
-  color: var(--text);
+/* Headings */
+h1, h2, h3 {
+    color: white !important;
+    letter-spacing: -0.02em;
 }
 
-/* ---- Buttons ---- */
-.stLinkButton a, .stButton>button{
-  border-radius: 14px !important;
-  font-weight: 700 !important;
-  border: 1px solid rgba(255,255,255,0.18) !important;
+/* Trust Card */
+.trust-card {
+    background: rgba(255,255,255,0.08);
+    padding: 18px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
 }
 
-/* Primary buttons (link_button) */
-.stLinkButton a{
-  background: linear-gradient(135deg, var(--primary), var(--primary2)) !important;
-  color: #07101f !important;
+/* Domain badges */
+.badge {
+    display: inline-block;
+    padding: 8px 14px;
+    margin: 6px 8px 0 0;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #06b6d4, #3b82f6);
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
 }
 
-/* Page link buttons */
-a[data-testid="stPageLink-NavLink"]{
-  border-radius: 12px !important;
+/* Buttons */
+.stLinkButton a {
+    background: linear-gradient(135deg, #06b6d4, #3b82f6) !important;
+    color: white !important;
+    border-radius: 12px !important;
+    font-weight: 700 !important;
+    padding: 10px 16px !important;
+    border: none !important;
 }
 
-/* ---- Sidebar ---- */
-section[data-testid="stSidebar"]{
-  background: rgba(255,255,255,0.05) !important;
-  border-right: 1px solid rgba(255,255,255,0.10) !important;
+/* Sidebar */
+section[data-testid="stSidebar"] {
+    background: rgba(255,255,255,0.05) !important;
+    border-right: 1px solid rgba(255,255,255,0.15);
 }
-section[data-testid="stSidebar"] *{ color: rgba(255,255,255,0.88) !important; }
+section[data-testid="stSidebar"] * {
+    color: white !important;
+}
 
 /* Footer */
-.ww-footer{ opacity:0.80; font-size:0.95rem; }
+.footer {
+    margin-top: 2rem;
+    opacity: 0.85;
+    font-size: 0.95rem;
+}
+
 </style>
+""", unsafe_allow_html=True)
+
+# ------------------- HEADER -------------------
+
+st.title("WriteWise Academic Help")
+st.caption("Professional Academic Support & Research Enhancement Services")
+
+st.divider()
+
+phone = "923007354339"
+wa_link = "https://wa.me/" + phone + "?text=" + urllib.parse.quote(
+    "Hello WriteWise Academic Help, I need a quote."
+)
+
+col1, col2 = st.columns([2,1])
+
+with col1:
+    st.subheader("Academic Support You Can Trust")
+    st.write(
+        "Worldwide remote academic support for editing, formatting, literature review structuring, "
+        "research methodology guidance, and document enhancement."
+    )
+    st.page_link("pages/3_Get_a_Quote.py", label="Get a Custom Quote")
+    st.link_button("WhatsApp Now", wa_link)
+
+with col2:
+    st.markdown("""
+    <div class="trust-card">
+    ✔ Response within 24 hours<br><br>
+    ✔ Free revisions (14 days)<br><br>
+    ✔ Custom quote pricing<br><br>
+    ✔ Worldwide / Remote Services
+    </div>
+    """, unsafe_allow_html=True)
+
+st.divider()
+
+# ------------------- DOMAINS -------------------
+
+st.subheader("Domains We Support")
+
+st.markdown("""
+<span class="badge">Business Studies</span>
+<span class="badge">Social Sciences</span>
+<span class="badge">Education</span>
+<span class="badge">Law</span>
+<span class="badge">Accounting</span>
+<span class="badge">Finance</span>
+<span class="badge">Research Methodology</span>
+""", unsafe_allow_html=True)
+
+st.divider()
+
+# ------------------- TURNAROUND -------------------
+
+st.subheader("Turnaround Options")
+
+st.table({
+    "Delivery Type": ["Normal", "Urgent", "Express"],
+    "Timeline": ["7 days", "3 days", "24 hours"]
+})
+
+st.divider()
+
+# ------------------- FOOTER -------------------
+
+st.markdown("""
+<div class="footer">
+<strong>WriteWise Academic Help</strong><br>
+WhatsApp: +92 300 7354339<br><br>
+We provide academic support, editing, formatting, and research enhancement services.
+Free revisions within 14 days. Response within 24 hours.
+</div>
 """, unsafe_allow_html=True)
