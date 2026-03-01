@@ -67,14 +67,14 @@ with col1:
     st.link_button("WhatsApp Now: +92 300 7354339", wa_link)
 
 with col2:
-st.markdown("""
-<div class="ww-trust">
-<strong>✔ Response time:</strong> within 24 hours<br>
-<strong>✔ Free revisions:</strong> 14 days (same scope)<br>
-<strong>✔ Pricing:</strong> Custom quote only<br>
-<strong>✔ Service mode:</strong> Worldwide / Remote
-</div>
-""", unsafe_allow_html=True)
+    st.markdown("""
+    <div class="ww-trust">
+    <strong>✔ Response time:</strong> within 24 hours<br>
+    <strong>✔ Free revisions:</strong> 14 days (same scope)<br>
+    <strong>✔ Pricing:</strong> Custom quote only<br>
+    <strong>✔ Service mode:</strong> Worldwide / Remote
+    </div>
+    """, unsafe_allow_html=True)
 
 st.divider()
 
@@ -106,5 +106,6 @@ WriteWise Academic Help • WhatsApp: +92 300 7354339<br>
 Professional academic support, editing, formatting & research enhancement services.
 </div>
 """, unsafe_allow_html=True)
+
 
 
