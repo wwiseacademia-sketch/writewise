@@ -87,17 +87,15 @@ with col2:
     """, unsafe_allow_html=True)
 
 st.divider()
-
-st.subheader("Domains We Support")
-
 st.markdown("""
-<span class="ww-badge">Business Studies</span>
-<span class="ww-badge">Social Sciences</span>
-<span class="ww-badge">Education</span>
-<span class="ww-badge">Law</span>
-<span class="ww-badge">Accounting</span>
-<span class="ww-badge">Finance</span>
-<span class="ww-badge">Research Methodology</span>
+<div class="ww-footer">
+<strong>WriteWise Academic Help</strong> • Worldwide / Remote Services<br>
+WhatsApp: <strong>+92 300 7354339</strong><br><br>
+<span style="opacity:0.85;">
+We provide academic support, editing, formatting, and research enhancement services.
+Free revisions within 14 days (same scope). Response within 24 hours.
+</span>
+</div>
 """, unsafe_allow_html=True)
 
 st.divider()
@@ -116,6 +114,7 @@ WriteWise Academic Help • WhatsApp: +92 300 7354339<br>
 Professional academic support, editing, formatting & research enhancement services.
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
