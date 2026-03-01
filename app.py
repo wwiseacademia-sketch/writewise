@@ -79,7 +79,16 @@ st.markdown("""
 st.divider()
 
 st.subheader("Domains We Support")
-st.write("Business Studies • Social Sciences • Education • Law • Accounting • Finance • Research Methodology")
+
+st.markdown("""
+<span class="ww-badge">Business Studies</span>
+<span class="ww-badge">Social Sciences</span>
+<span class="ww-badge">Education</span>
+<span class="ww-badge">Law</span>
+<span class="ww-badge">Accounting</span>
+<span class="ww-badge">Finance</span>
+<span class="ww-badge">Research Methodology</span>
+""", unsafe_allow_html=True)
 
 st.divider()
 
@@ -91,7 +100,11 @@ st.table({
 
 st.divider()
 
-st.caption("WhatsApp: +92 300 7354339 • Worldwide / Remote Services")
+st.markdown("""
+<div class="ww-footer">
+WriteWise Academic Help • WhatsApp: +92 300 7354339<br>
+Professional academic support, editing, formatting & research enhancement services.
+</div>
+""", unsafe_allow_html=True)
 
-st.caption("We provide academic support, editing, formatting, and research enhancement services.")
 
