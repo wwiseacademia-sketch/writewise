@@ -2,482 +2,398 @@ import streamlit as st
 import urllib.parse
 
 # ===================== PAGE CONFIG =====================
-st.set_page_config(page_title="WriteWise Premium", page_icon="🎓", layout="wide", initial_sidebar_state="collapsed")
+st.set_page_config(page_title="WriteWise Pro | Next-Gen", page_icon="⚡", layout="wide", initial_sidebar_state="collapsed")
 
-# ===================== SUPER PRO CSS (MODERN UI) =====================
+# ===================== ULTRA-MODERN DARK CSS =====================
 st.markdown("""
 <style>
-/* Import Premium Font: Plus Jakarta Sans */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+/* Import Premium Font: Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap');
 
-html, body, [class*="css"]  {
-    font-family: 'Plus Jakarta Sans', sans-serif !important;
+html, body, [class*="css"] {
+    font-family: 'Inter', sans-serif !important;
 }
 
 :root {
-    --primary: #064E3B; /* Deep Emerald */
-    --accent: #D4AF37; /* Premium Gold */
-    --bg-color: #F8FAFC; /* Off white background */
-    --card-bg: #FFFFFF;
-    --text-main: #0F172A;
-    --text-muted: #64748B;
-    --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.08);
-    --shadow-hover: 0 20px 40px -10px rgba(6, 78, 59, 0.15);
+    --bg-color: #050505;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --text-main: #FFFFFF;
+    --text-muted: #A1A1AA;
+    --accent-1: #3B82F6; /* Electric Blue */
+    --accent-2: #8B5CF6; /* Neon Purple */
     --radius: 24px;
 }
 
-/* Hide Streamlit default header/footer for a clean website look */
+/* Hide Streamlit default elements */
 header {visibility: hidden;}
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
 
+/* Base App Styling */
 .stApp {
     background-color: var(--bg-color);
-    background-image: radial-gradient(at 0% 0%, rgba(212, 175, 55, 0.05) 0px, transparent 50%),
-                      radial-gradient(at 100% 0%, rgba(6, 78, 59, 0.05) 0px, transparent 50%);
-    background-attachment: fixed;
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.08), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.08), transparent 25%);
+    color: var(--text-main);
 }
 
 /* --- HERO SECTION --- */
-.hero-container {
+.hero-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    padding: 80px 20px 60px 20px;
-    max-width: 900px;
-    margin: 0 auto;
+    padding: 100px 20px 80px 20px;
+    margin-top: -50px;
 }
-.hero-tag {
-    display: inline-block;
-    padding: 8px 16px;
-    background: rgba(212, 175, 55, 0.1);
-    color: #B45309;
+.hero-badge {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--card-border);
+    padding: 8px 20px;
     border-radius: 50px;
+    font-size: 0.9rem;
     font-weight: 600;
-    font-size: 14px;
-    margin-bottom: 20px;
     letter-spacing: 1px;
-    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 30px;
+    backdrop-filter: blur(10px);
+}
+.hero-badge span {
+    color: var(--accent-1);
 }
 .hero-title {
-    font-size: 4.5rem;
-    font-weight: 800;
-    color: var(--primary);
+    font-size: 5.5rem;
+    font-weight: 900;
     line-height: 1.1;
-    margin-bottom: 24px;
-    letter-spacing: -1.5px;
+    letter-spacing: -2px;
+    margin-bottom: 20px;
+    color: var(--text-main);
 }
-.hero-title span {
-    background: linear-gradient(135deg, var(--primary), #10B981);
+/* The Magic Gradient Text */
+.gradient-text {
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    display: inline-block;
 }
 .hero-subtitle {
     font-size: 1.25rem;
     color: var(--text-muted);
-    line-height: 1.6;
+    max-width: 700px;
     margin-bottom: 40px;
+    line-height: 1.6;
 }
 
-/* --- MODERN GRID LAYOUTS --- */
-.section-title {
-    text-align: center;
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: var(--text-main);
-    margin: 60px 0 20px 0;
-    letter-spacing: -0.5px;
-}
-.section-subtitle {
-    text-align: center;
-    color: var(--text-muted);
-    margin-bottom: 50px;
+/* --- BUTTONS --- */
+.btn-glow {
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    color: white !important;
+    padding: 16px 40px;
+    border-radius: 50px;
+    font-weight: 600;
     font-size: 1.1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+    display: inline-block;
+}
+.btn-glow:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.6);
 }
 
-.grid-3 {
+/* --- GLASSMORPHISM CARDS (BENTO BOX STYLE) --- */
+.section-heading {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin: 80px 0 20px 0;
+}
+.section-heading span {
+    color: var(--text-muted);
+    font-weight: 300;
+}
+.bento-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
     padding: 20px 0;
 }
-
-/* --- PREMIUM CARDS --- */
-.pro-card {
+.glass-card {
     background: var(--card-bg);
+    border: 1px solid var(--card-border);
     border-radius: var(--radius);
     padding: 40px 30px;
-    box-shadow: var(--shadow-soft);
-    border: 1px solid rgba(0,0,0,0.03);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(12px);
+    transition: all 0.4s ease;
     position: relative;
     overflow: hidden;
 }
-.pro-card:hover {
-    transform: translateY(-10px);
-    box-shadow: var(--shadow-hover);
-    border-color: rgba(6, 78, 59, 0.1);
+.glass-card:hover {
+    border-color: rgba(139, 92, 246, 0.4);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 20px rgba(139, 92, 246, 0.05);
 }
-.card-icon {
+.glass-icon {
     font-size: 2.5rem;
     margin-bottom: 20px;
-    display: inline-block;
-    padding: 15px;
-    background: rgba(6, 78, 59, 0.04);
-    border-radius: 16px;
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
-.pro-card h3 {
-    font-size: 1.4rem;
-    font-weight: 800;
-    color: var(--text-main);
-    margin-bottom: 12px;
+.glass-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
 }
-.pro-card p {
+.glass-card p {
     color: var(--text-muted);
     line-height: 1.6;
     font-size: 1rem;
 }
 
-/* --- TEAM SECTION (NEW) --- */
-.team-img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 20px;
-    border: 4px solid var(--bg-color);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+/* --- TEAM SECTION (CYBER LOOK) --- */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
 }
 .team-card {
     text-align: center;
     padding: 40px 20px;
+    border-radius: var(--radius);
+    background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, transparent 100%);
+    border: 1px solid var(--card-border);
+    transition: all 0.4s ease;
 }
-.team-role {
-    color: var(--accent);
-    font-weight: 600;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
+.team-card:hover {
+    border-color: var(--accent-1);
+    background: rgba(59, 130, 246, 0.05);
 }
-
-/* --- PRICING SECTION (NEW) --- */
-.pricing-card {
-    text-align: center;
-    padding: 50px 30px;
-    border-radius: 30px;
-    background: white;
-    box-shadow: var(--shadow-soft);
-    position: relative;
-    border: 1px solid rgba(0,0,0,0.05);
-}
-.pricing-card.popular {
-    background: var(--primary);
-    color: white;
-    transform: scale(1.05);
-    box-shadow: 0 25px 50px -12px rgba(6, 78, 59, 0.25);
-}
-.pricing-card.popular p, .pricing-card.popular h3 {
-    color: white !important;
-}
-.price {
-    font-size: 3rem;
-    font-weight: 800;
-    margin: 20px 0;
-}
-.price span { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
-.pricing-card.popular .price span { color: rgba(255,255,255,0.7); }
-.pricing-list {
-    list-style: none;
-    padding: 0;
-    margin: 30px 0;
-    text-align: left;
-}
-.pricing-list li {
-    margin-bottom: 15px;
-    padding-left: 30px;
-    position: relative;
-    color: var(--text-muted);
-}
-.pricing-card.popular .pricing-list li { color: rgba(255,255,255,0.9); }
-.pricing-list li::before {
-    content: "✓";
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-    font-weight: bold;
-}
-
-/* --- CUSTOM BUTTONS --- */
-.btn-primary {
-    display: inline-block;
-    background: var(--primary);
-    color: white !important;
-    padding: 16px 36px;
-    border-radius: 50px;
-    font-weight: 800;
-    text-decoration: none;
-    font-size: 1.1rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 20px rgba(6, 78, 59, 0.2);
-    border: none;
-}
-.btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 25px rgba(6, 78, 59, 0.3);
-    background: #04382A;
-}
-.btn-outline {
-    display: inline-block;
-    background: transparent;
-    color: var(--primary) !important;
-    padding: 14px 34px;
-    border-radius: 50px;
-    font-weight: 800;
-    text-decoration: none;
-    font-size: 1.1rem;
-    transition: all 0.3s ease;
-    border: 2px solid var(--primary);
-    margin-left: 15px;
-}
-.btn-outline:hover {
-    background: rgba(6, 78, 59, 0.05);
-}
-
-/* Floating WhatsApp */
-.wa-float {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: #25D366;
-    color: white;
-    width: 60px;
-    height: 60px;
+.team-avatar {
+    width: 140px;
+    height: 140px;
     border-radius: 50%;
-    text-align: center;
-    font-size: 30px;
-    line-height: 60px;
-    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
-    z-index: 1000;
-    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    filter: grayscale(100%) opacity(0.8);
+    transition: all 0.4s ease;
+    border: 2px solid transparent;
 }
-.wa-float:hover {
-    transform: scale(1.1) rotate(-10deg);
+.team-card:hover .team-avatar {
+    filter: grayscale(0%) opacity(1);
+    border-color: var(--accent-1);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+}
+.team-card h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 5px; }
+.team-role { color: var(--accent-2); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px;}
+
+/* --- PRICING SECTION --- */
+.pricing-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 50px 40px;
+    text-align: left;
+    transition: all 0.3s;
+}
+.pricing-pro {
+    background: linear-gradient(180deg, rgba(139, 92, 246, 0.1) 0%, rgba(255,255,255,0.02) 100%);
+    border: 1px solid rgba(139, 92, 246, 0.5);
+    transform: scale(1.05);
+    box-shadow: 0 0 40px rgba(139, 92, 246, 0.15);
+    position: relative;
+}
+.pricing-pro::before {
+    content: "RECOMMENDED";
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    color: white;
+    padding: 4px 16px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+.price-tag { font-size: 3.5rem; font-weight: 900; margin: 20px 0; color: white;}
+.price-tag span { font-size: 1.2rem; color: var(--text-muted); font-weight: 400;}
+.pricing-features { list-style: none; padding: 0; margin: 30px 0; }
+.pricing-features li { margin-bottom: 16px; color: #D4D4D8; display: flex; align-items: center;}
+.pricing-features li::before {
+    content: "✦";
+    color: var(--accent-2);
+    margin-right: 12px;
+    font-size: 1.2rem;
 }
 
-/* Stats Ribbon */
-.stats-ribbon {
-    display: flex;
-    justify-content: space-around;
-    background: white;
-    padding: 40px 20px;
-    border-radius: 24px;
-    box-shadow: var(--shadow-soft);
-    margin: -40px auto 60px auto;
-    max-width: 1000px;
-    position: relative;
-    z-index: 10;
+/* Custom Streamlit Container for Calculator */
+div[data-testid="stForm"] {
+    background: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 24px !important;
+    padding: 30px !important;
 }
-.stat-item text-align: center;
-.stat-num { font-size: 2.5rem; font-weight: 800; color: var(--primary); }
-.stat-label { color: var(--text-muted); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;}
+
 </style>
 """, unsafe_allow_html=True)
 
 phone = "923007354339"
 base_wa_link = f"https://wa.me/{phone}?text="
-default_msg = urllib.parse.quote("Hello WriteWise Premium, I am looking for academic assistance.")
-
-# ===================== FLOATING WHATSAPP =====================
-st.markdown(f'<a href="{base_wa_link}{default_msg}" class="wa-float" target="_blank">💬</a>', unsafe_allow_html=True)
 
 # ===================== HERO SECTION =====================
 st.markdown(f"""
-<div class="hero-container">
-    <div class="hero-tag">🌟 Global Academic Excellence</div>
-    <h1 class="hero-title">Elevate Your Research with <span>WriteWise</span></h1>
-    <p class="hero-subtitle">Premium editing, flawless formatting, and expert methodology guidance for PhDs, Master's students, and Researchers worldwide. Your success is our signature.</p>
-    <a href="{base_wa_link}{default_msg}" class="btn-primary" target="_blank">Get a Custom Quote</a>
-    <a href="#services" class="btn-outline">Explore Services</a>
-</div>
-
-<div class="stats-ribbon">
-    <div class="stat-item">
-        <div class="stat-num">500+</div>
-        <div class="stat-label">Projects Completed</div>
-    </div>
-    <div class="stat-item">
-        <div class="stat-num">99%</div>
-        <div class="stat-label">Approval Rate</div>
-    </div>
-    <div class="stat-item">
-        <div class="stat-num">24/7</div>
-        <div class="stat-label">Expert Support</div>
-    </div>
-    <div class="stat-item">
-        <div class="stat-num">14</div>
-        <div class="stat-label">Days Free Revision</div>
-    </div>
+<div class="hero-wrapper">
+    <div class="hero-badge"><span>NEW</span> The Next Generation of Academic Writing</div>
+    <h1 class="hero-title">Academic Perfection,<br><span class="gradient-text">Redefined.</span></h1>
+    <p class="hero-subtitle">We don't just edit papers; we engineer academic excellence. Experience the most advanced structural formatting and methodology guidance available worldwide.</p>
+    <a href="{base_wa_link}Hello, I need premium academic assistance." class="btn-glow" target="_blank">Start Your Project</a>
 </div>
 """, unsafe_allow_html=True)
 
+st.write("---")
 
-# ===================== SERVICES SECTION =====================
+# ===================== SERVICES (BENTO BOX) =====================
 st.markdown("""
-<div id="services">
-    <h2 class="section-title">Mastercraft Services</h2>
-    <p class="section-subtitle">Comprehensive academic support tailored to global university standards.</p>
-    <div class="grid-3">
-        <div class="pro-card">
-            <div class="card-icon">✒️</div>
-            <h3>Elite Proofreading</h3>
-            <p>Eradicate grammatical errors, refine sentence structures, and ensure a commanding academic tone throughout your manuscript.</p>
-        </div>
-        <div class="pro-card">
-            <div class="card-icon">📑</div>
-            <h3>Precision Formatting</h3>
-            <p>Flawless application of APA, MLA, Harvard, or Chicago styles. Perfect citations, bibliographies, and document architecture.</p>
-        </div>
-        <div class="pro-card">
-            <div class="card-icon">🔬</div>
-            <h3>Methodology Design</h3>
-            <p>Expert consultation on qualitative and quantitative frameworks. We help you justify your research approach with authority.</p>
-        </div>
-        <div class="pro-card">
-            <div class="card-icon">📚</div>
-            <h3>Literature Review</h3>
-            <p>Transform scattered sources into a compelling, synthesized narrative that highlights gaps and positions your research perfectly.</p>
-        </div>
-        <div class="pro-card">
-            <div class="card-icon">📊</div>
-            <h3>Data Presentation</h3>
-            <p>Enhance the visual and descriptive presentation of your findings. Making complex data comprehensible and impactful.</p>
-        </div>
-        <div class="pro-card">
-            <div class="card-icon">🛡️</div>
-            <h3>Plagiarism Check</h3>
-            <p>Comprehensive originality reports ensuring your work is 100% unique and adheres to the strictest academic integrity rules.</p>
-        </div>
+<h2 class="section-heading">Elite <span>Capabilities</span></h2>
+<div class="bento-grid">
+    <div class="glass-card">
+        <div class="glass-icon">⚡</div>
+        <h3>Neural Proofreading</h3>
+        <p>Beyond basic grammar. We refine sentence architecture, enhance vocabulary, and establish an authoritative academic voice that commands respect.</p>
+    </div>
+    <div class="glass-card">
+        <div class="glass-icon">📐</div>
+        <h3>Architectural Formatting</h3>
+        <p>Pixel-perfect adherence to APA 7, MLA, Harvard, or Chicago. Your citations, margins, and bibliography will be mathematically flawless.</p>
+    </div>
+    <div class="glass-card">
+        <div class="glass-icon">🧠</div>
+        <h3>Methodology Engineering</h3>
+        <p>Struggling with research design? We provide robust justification for your qualitative or quantitative frameworks, ensuring academic rigor.</p>
+    </div>
+    <div class="glass-card">
+        <div class="glass-icon">🔗</div>
+        <h3>Literature Synthesis</h3>
+        <p>We connect the dots. Transforming disjointed sources into a powerful narrative that highlights critical research gaps seamlessly.</p>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
+st.write("---")
 
-# ===================== MEET THE TEAM (NEW SECTION) =====================
+# ===================== THE TEAM =====================
 st.markdown("""
-<div>
-    <h2 class="section-title">Meet The Experts</h2>
-    <p class="section-subtitle">Your work is handled by post-graduates and industry veterans.</p>
-    <div class="grid-3">
-        <div class="pro-card team-card">
-            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah&backgroundColor=b6e3f4" class="team-img" alt="Team Member">
-            <div class="team-role">Head of Research</div>
-            <h3>Dr. Sarah Khan</h3>
-            <p>Ph.D. in Social Sciences. 10+ years experience in academic structuring and methodology design.</p>
-        </div>
-        <div class="pro-card team-card">
-            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Ali&backgroundColor=c0aede" class="team-img" alt="Team Member">
-            <div class="team-role">Lead Editor</div>
-            <h3>Prof. Ali Raza</h3>
-            <p>Specialist in Business & Finance literature. Master of APA & Harvard referencing styles.</p>
-        </div>
-        <div class="pro-card team-card">
-            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aisha&backgroundColor=ffdfbf" class="team-img" alt="Team Member">
-            <div class="team-role">Quality Assurance</div>
-            <h3>Aisha Malik, M.Phil</h3>
-            <p>Ensures every document meets elite university standards before final delivery.</p>
-        </div>
+<h2 class="section-heading">The <span>Minds</span> Behind It</h2>
+<div class="team-grid">
+    <div class="team-card">
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=300&auto=format&fit=crop" class="team-avatar" alt="Team">
+        <div class="team-role">Lead Architect</div>
+        <h3>Dr. Sarah Khan</h3>
+        <p style="color:var(--text-muted); font-size:0.9rem;">Ph.D. in Social Sciences. Pioneer in advanced research structuring.</p>
+    </div>
+    <div class="team-card">
+        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=300&auto=format&fit=crop" class="team-avatar" alt="Team">
+        <div class="team-role">Chief Editor</div>
+        <h3>Prof. Ali Raza</h3>
+        <p style="color:var(--text-muted); font-size:0.9rem;">Master of formatting. Has refined over 1,000+ academic dissertations.</p>
+    </div>
+    <div class="team-card">
+        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=300&auto=format&fit=crop" class="team-avatar" alt="Team">
+        <div class="team-role">QA Specialist</div>
+        <h3>Aisha Malik</h3>
+        <p style="color:var(--text-muted); font-size:0.9rem;">The final checkpoint. Ensures absolute perfection before delivery.</p>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
+st.write("---")
 
-# ===================== PRICING/PACKAGES (NEW SECTION) =====================
+# ===================== PRICING =====================
 st.markdown("""
-<div>
-    <h2 class="section-title">Transparent Pricing</h2>
-    <p class="section-subtitle">No hidden fees. Choose the tier that fits your academic needs.</p>
-    <div class="grid-3">
-        
-        <!-- Basic Tier -->
-        <div class="pricing-card">
-            <h3>Standard Polish</h3>
-            <div class="price">₨ 1.5<span>/word</span></div>
-            <p style="color:var(--text-muted); margin-bottom: 20px;">Perfect for final drafts needing a professional touch.</p>
-            <ul class="pricing-list">
-                <li>Grammar & Spelling Check</li>
-                <li>Punctuation Correction</li>
-                <li>Basic Sentence Flow</li>
-                <li>7-Day Turnaround</li>
-            </ul>
-        </div>
-
-        <!-- Premium Tier (Highlighted) -->
-        <div class="pricing-card popular">
-            <div style="position:absolute; top:-15px; left:50%; transform:translateX(-50%); background:#D4AF37; color:#fff; padding:5px 15px; border-radius:20px; font-weight:bold; font-size:0.8rem;">MOST POPULAR</div>
-            <h3>Complete Overhaul</h3>
-            <div class="price">₨ 2.5<span>/word</span></div>
-            <p style="color:rgba(255,255,255,0.8); margin-bottom: 20px;">Comprehensive structural and academic enhancement.</p>
-            <ul class="pricing-list">
-                <li>Everything in Standard</li>
-                <li>Academic Tone Adjustment</li>
-                <li>Full Referencing & Citations</li>
-                <li>Logical Flow Optimization</li>
-                <li>3-Day Turnaround</li>
-            </ul>
-            <a href="{base_wa_link}I want the Complete Overhaul package" class="btn-primary" style="background:white; color:var(--primary)!important; width:100%;">Select Premium</a>
-        </div>
-
-        <!-- Express Tier -->
-        <div class="pricing-card">
-            <h3>Express Delivery</h3>
-            <div class="price">₨ 4.0<span>/word</span></div>
-            <p style="color:var(--text-muted); margin-bottom: 20px;">For urgent deadlines without compromising quality.</p>
-            <ul class="pricing-list">
-                <li>Priority Support queue</li>
-                <li>Full Structural Editing</li>
-                <li>Advanced Formatting</li>
-                <li><strong>24-Hour Turnaround</strong></li>
-            </ul>
-        </div>
-
-    </div>
-</div>
-""", unsafe_allow_html=True)
-
-
-# ===================== STREAMLIT INTERACTIVE QUOTE (Kept & Stylized) =====================
-st.markdown("<h2 class='section-title'>Custom Quote Calculator</h2>", unsafe_allow_html=True)
-st.markdown("<p class='section-subtitle'>Need something specific? Calculate it instantly.</p>", unsafe_allow_html=True)
-
-with st.container():
-    c1, c2 = st.columns([2, 1], gap="large")
-    with c1:
-        words = st.slider("Select Word Count", min_value=500, max_value=20000, step=500, value=2000)
-        service = st.selectbox("Service Type", ["Proofreading", "Formatting", "Full Structural Review", "Methodology"])
-        urgency = st.radio("Turnaround Time", ["Standard (7 Days)", "Urgent (3 Days)", "Express (24 Hours)"], horizontal=True)
+<h2 class="section-heading">Transparent <span>Tiers</span></h2>
+<div class="bento-grid">
     
+    <div class="pricing-card">
+        <h3 style="color:var(--text-muted);">Standard Polish</h3>
+        <div class="price-tag">₨ 1.5<span>/word</span></div>
+        <p style="color:var(--text-muted); margin-bottom:30px;">For pristine, error-free final drafts.</p>
+        <ul class="pricing-features">
+            <li>Advanced Grammar Correction</li>
+            <li>Punctuation & Syntax Check</li>
+            <li>Standard Academic Tone</li>
+            <li>7-Day Delivery</li>
+        </ul>
+    </div>
+
+    <div class="pricing-card pricing-pro">
+        <h3 style="color:var(--accent-2);">Complete Overhaul</h3>
+        <div class="price-tag">₨ 2.5<span>/word</span></div>
+        <p style="color:var(--text-muted); margin-bottom:30px;">Full structural and citation enhancement.</p>
+        <ul class="pricing-features">
+            <li>Everything in Standard</li>
+            <li>Full Citation & Bibliography Formatting</li>
+            <li>Logical Flow & Structure Editing</li>
+            <li>3-Day Priority Delivery</li>
+        </ul>
+        <a href="https://wa.me/923007354339?text=I%20want%20the%20Complete%20Overhaul%20plan" class="btn-glow" style="width:100%; text-align:center; padding: 12px; margin-top:20px;">Select Pro</a>
+    </div>
+
+    <div class="pricing-card">
+        <h3 style="color:var(--text-muted);">Express Action</h3>
+        <div class="price-tag">₨ 4.0<span>/word</span></div>
+        <p style="color:var(--text-muted); margin-bottom:30px;">When deadlines are dangerously close.</p>
+        <ul class="pricing-features">
+            <li>Highest Priority Queue</li>
+            <li>Full Structural Editing</li>
+            <li>Direct Expert Communication</li>
+            <li style="color:white; font-weight:bold;">24-Hour Turnaround</li>
+        </ul>
+    </div>
+
+</div>
+""", unsafe_allow_html=True)
+
+st.write("---")
+
+# ===================== INTERACTIVE QUOTE ENGINE =====================
+st.markdown("<h2 class='section-heading'>Quote <span>Engine</span></h2>", unsafe_allow_html=True)
+
+with st.form("quote_engine"):
+    c1, c2 = st.columns(2)
+    with c1:
+        words = st.number_input("Total Words", min_value=500, value=2000, step=100)
+        service = st.selectbox("Select Capability", ["Proofreading", "Formatting", "Structural Review"])
     with c2:
-        # Simple Calculation Logic
-        base = 1.5 if service == "Proofreading" else 2.0 if service == "Formatting" else 2.5 if service == "Full Structural Review" else 3.0
+        urgency = st.selectbox("Delivery Speed", ["Standard (7 Days)", "Urgent (3 Days)", "Express (24 Hours)"])
+        st.write("")
+        st.write("")
+        submit = st.form_submit_button("Calculate Project Cost", use_container_width=True)
+
+    if submit:
+        base = 1.5 if service == "Proofreading" else 2.0 if service == "Formatting" else 2.5
         mult = 1.0 if "7 Days" in urgency else 1.5 if "3 Days" in urgency else 2.0
         total = words * base * mult
         
         st.markdown(f"""
-        <div class="pro-card" style="text-align:center; background: var(--primary); color: white;">
-            <h3 style="color:white; margin-bottom:0;">Estimated Cost</h3>
-            <div style="font-size:3rem; font-weight:800; margin:10px 0; color: #10B981;">₨ {total:,.0f}</div>
-            <p style="color:rgba(255,255,255,0.7); font-size:0.9rem;">{words} words • {urgency}</p>
+        <div style="margin-top:20px; text-align:center; padding:30px; border-radius:16px; background:rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3);">
+            <h3 style="color:var(--text-muted); margin:0;">Estimated Investment</h3>
+            <h1 style="color:var(--accent-1); font-size:3.5rem; margin:10px 0;">₨ {total:,.0f}</h1>
+            <a href="{base_wa_link}Project details: {words} words, {service}, {urgency}. Cost: Rs {total:,.0f}" class="btn-glow" target="_blank">Deploy Request via WhatsApp</a>
         </div>
         """, unsafe_allow_html=True)
-        
-        st.write("")
-        custom_msg = f"Hello WriteWise! I need {service} for {words} words. Need it by {urgency}. Estimated price is Rs {total:,.0f}."
-        st.markdown(f'<a href="{base_wa_link}{urllib.parse.quote(custom_msg)}" class="btn-primary" style="width:100%; text-align:center;" target="_blank">Book Now via WhatsApp</a>', unsafe_allow_html=True)
 
 # ===================== FOOTER =====================
 st.markdown("""
-<div style="text-align:center; padding: 60px 20px 30px 20px; border-top: 1px solid rgba(0,0,0,0.05); margin-top: 60px;">
-    <h2 style="color: var(--primary); font-weight: 800; margin-bottom: 10px;">WriteWise Premium</h2>
-    <p style="color: var(--text-muted); margin-bottom: 20px;">Strictly Confidential • 100% Plagiarism Free • Ethical Academic Support</p>
-    <p style="font-size: 0.9rem; color: #94A3B8;">© 2026 WriteWise Academic Help. All rights reserved.</p>
+<div style="text-align:center; padding: 80px 20px 40px 20px; margin-top: 50px; border-top: 1px solid var(--card-border);">
+    <h2 style="font-weight: 900; letter-spacing: -1px;">Write<span style="color:var(--accent-1);">Wise</span></h2>
+    <p style="color: var(--text-muted); margin-top: 10px;">The Future of Academic Excellence.</p>
+    <p style="font-size: 0.8rem; color: #52525B; margin-top: 30px;">© 2026 WriteWise. Strict Privacy Enforced.</p>
 </div>
 """, unsafe_allow_html=True)
