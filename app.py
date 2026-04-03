@@ -2,30 +2,34 @@ import streamlit as st
 import urllib.parse
 
 # ===================== PAGE CONFIG =====================
-st.set_page_config(page_title="WriteWise Pro | Next-Gen", page_icon="⚡", layout="wide", initial_sidebar_state="collapsed")
+st.set_page_config(page_title="WriteWise | Academic Excellence", page_icon="🏛️", layout="wide", initial_sidebar_state="collapsed")
 
-# ===================== ULTRA-MODERN DARK CSS =====================
+# ===================== CORPORATE PRO CSS =====================
 st.markdown("""
 <style>
-/* Import Premium Font: Inter */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap');
+/* Premium Corporate Font: 'Inter' */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 html, body, [class*="css"] {
     font-family: 'Inter', sans-serif !important;
 }
 
 :root {
-    --bg-color: #050505;
-    --card-bg: rgba(255, 255, 255, 0.03);
-    --card-border: rgba(255, 255, 255, 0.08);
-    --text-main: #FFFFFF;
-    --text-muted: #A1A1AA;
-    --accent-1: #3B82F6; /* Electric Blue */
-    --accent-2: #8B5CF6; /* Neon Purple */
-    --radius: 24px;
+    --primary: #0F172A; /* Deep Slate/Navy - Very Corporate */
+    --secondary: #2563EB; /* Trust Blue */
+    --accent: #F59E0B; /* Subtle Gold/Amber for highlights */
+    --bg-color: #F8FAFC; /* Crisp Off-White */
+    --surface: #FFFFFF;
+    --text-main: #1E293B;
+    --text-light: #64748B;
+    --border-color: #E2E8F0;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+    --radius: 12px; /* Sharper, more corporate corners */
 }
 
-/* Hide Streamlit default elements */
+/* Hide Default Streamlit Elements */
 header {visibility: hidden;}
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
@@ -33,367 +37,428 @@ footer {visibility: hidden;}
 /* Base App Styling */
 .stApp {
     background-color: var(--bg-color);
-    background-image: 
-        radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.08), transparent 25%),
-        radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.08), transparent 25%);
     color: var(--text-main);
+}
+
+/* --- INTERACTIVE TABS (Clean Corporate Style) --- */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 8px;
+    padding: 10px 20px 0 20px;
+    border-bottom: 2px solid var(--border-color);
+    justify-content: center;
+}
+.stTabs [data-baseweb="tab"] {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-light);
+    padding: 12px 24px;
+    border-radius: var(--radius) var(--radius) 0 0;
+    background-color: transparent;
+    border: none;
+    transition: all 0.2s ease;
+}
+.stTabs [data-baseweb="tab"]:hover {
+    color: var(--secondary);
+    background-color: #EFF6FF;
+}
+.stTabs [data-baseweb="tab"][aria-selected="true"] {
+    color: var(--primary);
+    background-color: var(--surface);
+    border-top: 3px solid var(--secondary);
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    border-bottom: none;
+    box-shadow: var(--shadow-sm);
 }
 
 /* --- HERO SECTION --- */
 .hero-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    background: linear-gradient(135deg, var(--primary) 0%, #1E293B 100%);
+    color: white;
+    padding: 80px 20px;
+    border-radius: var(--radius);
     text-align: center;
-    padding: 100px 20px 80px 20px;
-    margin-top: -50px;
+    margin: 20px 0 40px 0;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+}
+/* Subtle background pattern in Hero */
+.hero-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.5;
+    pointer-events: none;
 }
 .hero-badge {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid var(--card-border);
-    padding: 8px 20px;
-    border-radius: 50px;
-    font-size: 0.9rem;
-    font-weight: 600;
+    display: inline-block;
+    background: rgba(37, 99, 235, 0.2);
+    color: #60A5FA;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
     letter-spacing: 1px;
-    color: var(--text-muted);
-    margin-bottom: 30px;
-    backdrop-filter: blur(10px);
-}
-.hero-badge span {
-    color: var(--accent-1);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    border: 1px solid rgba(37, 99, 235, 0.3);
 }
 .hero-title {
-    font-size: 5.5rem;
-    font-weight: 900;
+    font-size: 4rem;
+    font-weight: 800;
     line-height: 1.1;
-    letter-spacing: -2px;
     margin-bottom: 20px;
-    color: var(--text-main);
+    letter-spacing: -1px;
 }
-/* The Magic Gradient Text */
-.gradient-text {
-    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    display: inline-block;
-}
+.hero-title span { color: var(--secondary); }
 .hero-subtitle {
-    font-size: 1.25rem;
-    color: var(--text-muted);
-    max-width: 700px;
-    margin-bottom: 40px;
+    font-size: 1.2rem;
+    color: #CBD5E1;
+    max-width: 800px;
+    margin: 0 auto 40px auto;
     line-height: 1.6;
 }
 
 /* --- BUTTONS --- */
-.btn-glow {
-    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+.btn-primary {
+    background-color: var(--secondary);
     color: white !important;
-    padding: 16px 40px;
-    border-radius: 50px;
+    padding: 14px 32px;
+    border-radius: 8px;
     font-weight: 600;
     font-size: 1.1rem;
     text-decoration: none;
-    transition: all 0.3s ease;
-    border: none;
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+    transition: all 0.2s ease;
     display: inline-block;
+    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.25);
+    border: 1px solid transparent;
 }
-.btn-glow:hover {
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 0 30px rgba(139, 92, 246, 0.6);
+.btn-primary:hover {
+    background-color: #1D4ED8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
+}
+.btn-outline {
+    background-color: transparent;
+    color: white !important;
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: inline-block;
+    border: 2px solid rgba(255,255,255,0.3);
+    margin-left: 15px;
+}
+.btn-outline:hover {
+    background-color: rgba(255,255,255,0.1);
+    border-color: white;
 }
 
-/* --- GLASSMORPHISM CARDS (BENTO BOX STYLE) --- */
-.section-heading {
+/* --- SERVICES CARDS (Clean Grid) --- */
+.section-header {
     text-align: center;
-    font-size: 3rem;
-    font-weight: 800;
-    letter-spacing: -1px;
-    margin: 80px 0 20px 0;
+    margin: 60px 0 40px 0;
 }
-.section-heading span {
-    color: var(--text-muted);
-    font-weight: 300;
-}
-.bento-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 24px;
-    padding: 20px 0;
-}
-.glass-card {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: var(--radius);
-    padding: 40px 30px;
-    backdrop-filter: blur(12px);
-    transition: all 0.4s ease;
-    position: relative;
-    overflow: hidden;
-}
-.glass-card:hover {
-    border-color: rgba(139, 92, 246, 0.4);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 20px rgba(139, 92, 246, 0.05);
-}
-.glass-icon {
+.section-header h2 {
     font-size: 2.5rem;
-    margin-bottom: 20px;
-    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+    color: var(--primary);
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
 }
-.glass-card h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 15px;
-}
-.glass-card p {
-    color: var(--text-muted);
-    line-height: 1.6;
-    font-size: 1rem;
+.section-header p {
+    font-size: 1.1rem;
+    color: var(--text-light);
 }
 
-/* --- TEAM SECTION (CYBER LOOK) --- */
-.team-grid {
+.service-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
 }
-.team-card {
+.service-card {
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 32px;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: #BFDBFE;
+}
+.service-icon {
+    font-size: 2rem;
+    color: var(--secondary);
+    background: #EFF6FF;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+.service-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 12px;
+}
+.service-card p {
+    color: var(--text-light);
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin-bottom: 0;
+}
+
+/* --- TEAM TAB STYLING --- */
+.team-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.team-member {
+    display: flex;
+    align-items: center;
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 30px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.2s ease;
+}
+.team-member:hover {
+    box-shadow: var(--shadow-md);
+    border-left: 4px solid var(--secondary);
+}
+.team-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 30px;
+    border: 3px solid #EFF6FF;
+}
+.team-info h3 { font-size: 1.4rem; font-weight: 700; color: var(--primary); margin: 0 0 5px 0;}
+.team-role { color: var(--secondary); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;}
+.team-desc { color: var(--text-light); line-height: 1.6; margin:0;}
+
+/* --- FLOATING WHATSAPP --- */
+.wa-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25D366;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
+    z-index: 1000;
+    transition: transform 0.2s ease;
+    text-decoration: none;
+}
+.wa-btn:hover { transform: scale(1.1); }
+
+/* --- FOOTER --- */
+.footer-clean {
     text-align: center;
     padding: 40px 20px;
-    border-radius: var(--radius);
-    background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, transparent 100%);
-    border: 1px solid var(--card-border);
-    transition: all 0.4s ease;
+    margin-top: 60px;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-light);
 }
-.team-card:hover {
-    border-color: var(--accent-1);
-    background: rgba(59, 130, 246, 0.05);
-}
-.team-avatar {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    margin-bottom: 20px;
-    filter: grayscale(100%) opacity(0.8);
-    transition: all 0.4s ease;
-    border: 2px solid transparent;
-}
-.team-card:hover .team-avatar {
-    filter: grayscale(0%) opacity(1);
-    border-color: var(--accent-1);
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
-}
-.team-card h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 5px; }
-.team-role { color: var(--accent-2); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px;}
-
-/* --- PRICING SECTION --- */
-.pricing-card {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: var(--radius);
-    padding: 50px 40px;
-    text-align: left;
-    transition: all 0.3s;
-}
-.pricing-pro {
-    background: linear-gradient(180deg, rgba(139, 92, 246, 0.1) 0%, rgba(255,255,255,0.02) 100%);
-    border: 1px solid rgba(139, 92, 246, 0.5);
-    transform: scale(1.05);
-    box-shadow: 0 0 40px rgba(139, 92, 246, 0.15);
-    position: relative;
-}
-.pricing-pro::before {
-    content: "RECOMMENDED";
-    position: absolute;
-    top: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-    color: white;
-    padding: 4px 16px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 800;
-    letter-spacing: 1px;
-}
-.price-tag { font-size: 3.5rem; font-weight: 900; margin: 20px 0; color: white;}
-.price-tag span { font-size: 1.2rem; color: var(--text-muted); font-weight: 400;}
-.pricing-features { list-style: none; padding: 0; margin: 30px 0; }
-.pricing-features li { margin-bottom: 16px; color: #D4D4D8; display: flex; align-items: center;}
-.pricing-features li::before {
-    content: "✦";
-    color: var(--accent-2);
-    margin-right: 12px;
-    font-size: 1.2rem;
-}
-
-/* Custom Streamlit Container for Calculator */
-div[data-testid="stForm"] {
-    background: rgba(255, 255, 255, 0.02) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    border-radius: 24px !important;
-    padding: 30px !important;
-}
-
+.footer-clean h4 { color: var(--primary); font-weight: 700; margin-bottom: 10px;}
 </style>
 """, unsafe_allow_html=True)
 
 phone = "923007354339"
 base_wa_link = f"https://wa.me/{phone}?text="
+default_msg = urllib.parse.quote("Hello WriteWise, I need a consultation for my academic project.")
 
-# ===================== HERO SECTION =====================
-st.markdown(f"""
-<div class="hero-wrapper">
-    <div class="hero-badge"><span>NEW</span> The Next Generation of Academic Writing</div>
-    <h1 class="hero-title">Academic Perfection,<br><span class="gradient-text">Redefined.</span></h1>
-    <p class="hero-subtitle">We don't just edit papers; we engineer academic excellence. Experience the most advanced structural formatting and methodology guidance available worldwide.</p>
-    <a href="{base_wa_link}Hello, I need premium academic assistance." class="btn-glow" target="_blank">Start Your Project</a>
-</div>
-""", unsafe_allow_html=True)
+# ===================== FLOATING WHATSAPP =====================
+st.markdown(f'<a href="{base_wa_link}{default_msg}" class="wa-btn" target="_blank">💬</a>', unsafe_allow_html=True)
 
-st.write("---")
+# ===================== MAIN APPLICATION TABS =====================
+tab1, tab2, tab3 = st.tabs(["🏛️ Home & Services", "👥 Our Experts", "📝 Get a Quote"])
 
-# ===================== SERVICES (BENTO BOX) =====================
-st.markdown("""
-<h2 class="section-heading">Elite <span>Capabilities</span></h2>
-<div class="bento-grid">
-    <div class="glass-card">
-        <div class="glass-icon">⚡</div>
-        <h3>Neural Proofreading</h3>
-        <p>Beyond basic grammar. We refine sentence architecture, enhance vocabulary, and establish an authoritative academic voice that commands respect.</p>
+# ----------------- TAB 1: HOME & SERVICES -----------------
+with tab1:
+    st.markdown(f"""
+    <div class="hero-wrapper">
+        <div class="hero-badge">Global Academic Consulting</div>
+        <h1 class="hero-title">Elevating Academic <span>Standards.</span></h1>
+        <p class="hero-subtitle">We provide rigorous structural editing, precise formatting, and expert methodology consultation for researchers and post-graduates worldwide. Strict confidentiality guaranteed.</p>
+        <a href="{base_wa_link}I would like to discuss my academic requirements." class="btn-primary" target="_blank">Consult an Expert</a>
+        <a href="mailto:info@writewise.com" class="btn-outline">Email Us</a>
     </div>
-    <div class="glass-card">
-        <div class="glass-icon">📐</div>
-        <h3>Architectural Formatting</h3>
-        <p>Pixel-perfect adherence to APA 7, MLA, Harvard, or Chicago. Your citations, margins, and bibliography will be mathematically flawless.</p>
-    </div>
-    <div class="glass-card">
-        <div class="glass-icon">🧠</div>
-        <h3>Methodology Engineering</h3>
-        <p>Struggling with research design? We provide robust justification for your qualitative or quantitative frameworks, ensuring academic rigor.</p>
-    </div>
-    <div class="glass-card">
-        <div class="glass-icon">🔗</div>
-        <h3>Literature Synthesis</h3>
-        <p>We connect the dots. Transforming disjointed sources into a powerful narrative that highlights critical research gaps seamlessly.</p>
-    </div>
-</div>
-""", unsafe_allow_html=True)
-
-st.write("---")
-
-# ===================== THE TEAM =====================
-st.markdown("""
-<h2 class="section-heading">The <span>Minds</span> Behind It</h2>
-<div class="team-grid">
-    <div class="team-card">
-        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=300&auto=format&fit=crop" class="team-avatar" alt="Team">
-        <div class="team-role">Lead Architect</div>
-        <h3>Dr. Sarah Khan</h3>
-        <p style="color:var(--text-muted); font-size:0.9rem;">Ph.D. in Social Sciences. Pioneer in advanced research structuring.</p>
-    </div>
-    <div class="team-card">
-        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=300&auto=format&fit=crop" class="team-avatar" alt="Team">
-        <div class="team-role">Chief Editor</div>
-        <h3>Prof. Ali Raza</h3>
-        <p style="color:var(--text-muted); font-size:0.9rem;">Master of formatting. Has refined over 1,000+ academic dissertations.</p>
-    </div>
-    <div class="team-card">
-        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=300&auto=format&fit=crop" class="team-avatar" alt="Team">
-        <div class="team-role">QA Specialist</div>
-        <h3>Aisha Malik</h3>
-        <p style="color:var(--text-muted); font-size:0.9rem;">The final checkpoint. Ensures absolute perfection before delivery.</p>
-    </div>
-</div>
-""", unsafe_allow_html=True)
-
-st.write("---")
-
-# ===================== PRICING =====================
-st.markdown("""
-<h2 class="section-heading">Transparent <span>Tiers</span></h2>
-<div class="bento-grid">
     
-    <div class="pricing-card">
-        <h3 style="color:var(--text-muted);">Standard Polish</h3>
-        <div class="price-tag">₨ 1.5<span>/word</span></div>
-        <p style="color:var(--text-muted); margin-bottom:30px;">For pristine, error-free final drafts.</p>
-        <ul class="pricing-features">
-            <li>Advanced Grammar Correction</li>
-            <li>Punctuation & Syntax Check</li>
-            <li>Standard Academic Tone</li>
-            <li>7-Day Delivery</li>
-        </ul>
+    <div class="section-header">
+        <h2>Core Competencies</h2>
+        <p>Specialized academic services tailored to meet elite university guidelines.</p>
     </div>
-
-    <div class="pricing-card pricing-pro">
-        <h3 style="color:var(--accent-2);">Complete Overhaul</h3>
-        <div class="price-tag">₨ 2.5<span>/word</span></div>
-        <p style="color:var(--text-muted); margin-bottom:30px;">Full structural and citation enhancement.</p>
-        <ul class="pricing-features">
-            <li>Everything in Standard</li>
-            <li>Full Citation & Bibliography Formatting</li>
-            <li>Logical Flow & Structure Editing</li>
-            <li>3-Day Priority Delivery</li>
-        </ul>
-        <a href="https://wa.me/923007354339?text=I%20want%20the%20Complete%20Overhaul%20plan" class="btn-glow" style="width:100%; text-align:center; padding: 12px; margin-top:20px;">Select Pro</a>
-    </div>
-
-    <div class="pricing-card">
-        <h3 style="color:var(--text-muted);">Express Action</h3>
-        <div class="price-tag">₨ 4.0<span>/word</span></div>
-        <p style="color:var(--text-muted); margin-bottom:30px;">When deadlines are dangerously close.</p>
-        <ul class="pricing-features">
-            <li>Highest Priority Queue</li>
-            <li>Full Structural Editing</li>
-            <li>Direct Expert Communication</li>
-            <li style="color:white; font-weight:bold;">24-Hour Turnaround</li>
-        </ul>
-    </div>
-
-</div>
-""", unsafe_allow_html=True)
-
-st.write("---")
-
-# ===================== INTERACTIVE QUOTE ENGINE =====================
-st.markdown("<h2 class='section-heading'>Quote <span>Engine</span></h2>", unsafe_allow_html=True)
-
-with st.form("quote_engine"):
-    c1, c2 = st.columns(2)
-    with c1:
-        words = st.number_input("Total Words", min_value=500, value=2000, step=100)
-        service = st.selectbox("Select Capability", ["Proofreading", "Formatting", "Structural Review"])
-    with c2:
-        urgency = st.selectbox("Delivery Speed", ["Standard (7 Days)", "Urgent (3 Days)", "Express (24 Hours)"])
-        st.write("")
-        st.write("")
-        submit = st.form_submit_button("Calculate Project Cost", use_container_width=True)
-
-    if submit:
-        base = 1.5 if service == "Proofreading" else 2.0 if service == "Formatting" else 2.5
-        mult = 1.0 if "7 Days" in urgency else 1.5 if "3 Days" in urgency else 2.0
-        total = words * base * mult
-        
-        st.markdown(f"""
-        <div style="margin-top:20px; text-align:center; padding:30px; border-radius:16px; background:rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3);">
-            <h3 style="color:var(--text-muted); margin:0;">Estimated Investment</h3>
-            <h1 style="color:var(--accent-1); font-size:3.5rem; margin:10px 0;">₨ {total:,.0f}</h1>
-            <a href="{base_wa_link}Project details: {words} words, {service}, {urgency}. Cost: Rs {total:,.0f}" class="btn-glow" target="_blank">Deploy Request via WhatsApp</a>
+    
+    <div class="service-grid">
+        <div class="service-card">
+            <div class="service-icon">✒️</div>
+            <h3>Structural Editing</h3>
+            <p>Beyond basic proofreading. We refine sentence flow, correct academic tone, and ensure logical progression throughout your manuscript.</p>
         </div>
-        """, unsafe_allow_html=True)
+        <div class="service-card">
+            <div class="service-icon">📑</div>
+            <h3>Precision Formatting</h3>
+            <p>Flawless implementation of APA, MLA, Harvard, or Chicago styles. We handle complex citations and bibliography structures.</p>
+        </div>
+        <div class="service-card">
+            <div class="service-icon">🔬</div>
+            <h3>Methodology Consultation</h3>
+            <p>Expert guidance on research design. We help justify your qualitative or quantitative approach with academic rigor.</p>
+        </div>
+        <div class="service-card">
+            <div class="service-icon">📚</div>
+            <h3>Literature Synthesis</h3>
+            <p>We help organize scattered literature into a cohesive narrative, identifying clear research gaps to strengthen your thesis.</p>
+        </div>
+        <div class="service-card">
+            <div class="service-icon">📊</div>
+            <h3>Data Presentation</h3>
+            <p>Transforming complex datasets into clear, comprehensible narratives. Ensuring your findings are communicated effectively.</p>
+        </div>
+        <div class="service-card">
+            <div class="service-icon">🛡️</div>
+            <h3>Integrity & Plagiarism</h3>
+            <p>Comprehensive reviews to ensure your work is entirely original and adheres to the strictest academic integrity policies.</p>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+# ----------------- TAB 2: OUR EXPERTS (TEAM) -----------------
+with tab2:
+    st.markdown("""
+    <div class="section-header" style="margin-top: 20px;">
+        <h2>The Consulting Team</h2>
+        <p>Your work is reviewed by subject-matter experts and seasoned academics.</p>
+    </div>
+    
+    <div class="team-container">
+        <div class="team-member">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop" class="team-img" alt="Dr. Sarah Khan">
+            <div class="team-info">
+                <h3>Dr. Sarah Khan</h3>
+                <div class="team-role">Director of Research Methodology</div>
+                <p class="team-desc">Ph.D. in Social Sciences. With over 12 years of experience in academia, Dr. Khan specializes in structuring complex research frameworks and guiding quantitative methodologies for doctoral candidates.</p>
+            </div>
+        </div>
+        
+        <div class="team-member">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=200&auto=format&fit=crop" class="team-img" alt="Prof. Ali Raza">
+            <div class="team-info">
+                <h3>Prof. Ali Raza</h3>
+                <div class="team-role">Head of Editorial Services</div>
+                <p class="team-desc">A veteran in academic publishing, Prof. Raza has meticulously formatted and edited over 800+ manuscripts. He is an absolute authority on APA 7th Edition and Harvard referencing systems.</p>
+            </div>
+        </div>
+        
+        <div class="team-member">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop" class="team-img" alt="Aisha Malik">
+            <div class="team-info">
+                <h3>Aisha Malik, M.Phil</h3>
+                <div class="team-role">Quality Assurance Lead</div>
+                <p class="team-desc">Holding an M.Phil in Literature, Aisha is the final checkpoint for all documents. She ensures that every manuscript not only meets but exceeds the linguistic and structural standards of elite universities.</p>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+# ----------------- TAB 3: GET A QUOTE (Direct WhatsApp) -----------------
+with tab3:
+    st.markdown("""
+    <div class="section-header" style="margin-top: 20px;">
+        <h2>Request a Custom Proposal</h2>
+        <p>Tell us about your project, and we will connect with you directly via WhatsApp to discuss scope, timeline, and pricing.</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Custom Form Layout mimicking a professional contact form
+    st.markdown("""
+    <style>
+    /* Styling the Streamlit Form to look like a Corporate Contact Form */
+    div[data-testid="stForm"] {
+        max-width: 800px;
+        margin: 0 auto;
+        background: var(--surface) !important;
+        border: 1px solid var(--border-color) !important;
+        border-radius: var(--radius) !important;
+        padding: 40px !important;
+        box-shadow: var(--shadow-md) !important;
+    }
+    div[data-testid="stFormSubmitButton"] > button {
+        background-color: var(--primary) !important;
+        color: white !important;
+        width: 100%;
+        padding: 12px;
+        font-size: 1.1rem;
+        border-radius: 8px;
+        border: none;
+        transition: background-color 0.2s;
+    }
+    div[data-testid="stFormSubmitButton"] > button:hover {
+        background-color: #334155 !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+    with st.form("direct_quote_form"):
+        c1, c2 = st.columns(2)
+        with c1:
+            name = st.text_input("Your Name / Alias")
+            academic_level = st.selectbox("Academic Level", ["Undergraduate", "Master's", "Ph.D.", "Post-Doc / Researcher"])
+        with c2:
+            service_needed = st.selectbox("Primary Service Needed", ["Structural Editing", "Formatting & Citations", "Methodology Guidance", "Complete Package"])
+            word_count = st.number_input("Approximate Word Count", min_value=0, step=500, value=2000)
+        
+        urgency = st.radio("Required Timeline", ["Standard (7+ Days)", "Urgent (3-5 Days)", "Express (24-48 Hours)"], horizontal=True)
+        additional_notes = st.text_area("Briefly describe your requirements or challenges")
+        
+        st.write("")
+        submit_quote = st.form_submit_button("🚀 Submit to WhatsApp")
+        
+        if submit_quote:
+            # Construct WhatsApp Message
+            msg = f"Hello WriteWise, I need a quote.\n\n"
+            if name: msg += f"*Name:* {name}\n"
+            msg += f"*Level:* {academic_level}\n"
+            msg += f"*Service:* {service_needed}\n"
+            msg += f"*Words:* {word_count}\n"
+            msg += f"*Timeline:* {urgency}\n"
+            if additional_notes: msg += f"\n*Notes:* {additional_notes}"
+            
+            final_link = base_wa_link + urllib.parse.quote(msg)
+            
+            # Using st.components.v1 to automatically open the link in a new tab upon click
+            import streamlit.components.v1 as components
+            js = f"window.open('{final_link}', '_blank');"
+            components.html(f"<script>{js}</script>", height=0, width=0)
+            
+            st.success("✅ Request generated! If WhatsApp didn't open automatically, [Click Here to send your message.](" + final_link + ")")
 
 # ===================== FOOTER =====================
 st.markdown("""
-<div style="text-align:center; padding: 80px 20px 40px 20px; margin-top: 50px; border-top: 1px solid var(--card-border);">
-    <h2 style="font-weight: 900; letter-spacing: -1px;">Write<span style="color:var(--accent-1);">Wise</span></h2>
-    <p style="color: var(--text-muted); margin-top: 10px;">The Future of Academic Excellence.</p>
-    <p style="font-size: 0.8rem; color: #52525B; margin-top: 30px;">© 2026 WriteWise. Strict Privacy Enforced.</p>
+<div class="footer-clean">
+    <h4>WriteWise Consulting</h4>
+    <p>Ethical Academic Support • 100% Confidential • Professional Excellence</p>
+    <p style="font-size: 0.85rem; margin-top: 20px;">© 2026 WriteWise Academic Consulting. All rights reserved.</p>
 </div>
 """, unsafe_allow_html=True)
