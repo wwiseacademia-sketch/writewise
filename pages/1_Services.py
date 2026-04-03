@@ -1,99 +1,159 @@
 import streamlit as st
-from utils.theme import apply_pro_theme
 
-# Page Configuration
-st.set_page_config(page_title="Our Services | WriteWise Academic", page_icon="📜", layout="wide")
+# 1. Page Configuration
+st.set_page_config(
+    page_title="Our Services | WriteWise",
+    page_icon="✨",
+    layout="wide"
+)
 
-# Applying the central professional theme
-apply_pro_theme()
-
-# Header Section
+# 2. Modern Custom CSS for Services Page
 st.markdown("""
-<div class="header-box">
-    <h1>Our <span class="gradient-text">Core Academic Services</span></h1>
-    <p style="font-size: 1.1rem; color: var(--text-light); max-width: 800px; margin: 0 auto;">
-        We provide high-end academic support tailored to meet the rigorous standards of global universities. 
-        Our experts ensure clarity, precision, and excellence in every document.
-    </p>
-</div>
-""", unsafe_allow_html=True)
-
-# Services Data (10 Services Total)
-services = [
-    {
-        "icon": "bi-journal-check", 
-        "title": "Assignment Writing", 
-        "desc": "Comprehensive support for complex academic assignments, ensuring high-quality content that strictly adheres to specific institutional rubrics and learning outcomes."
-    },
-    {
-        "icon": "bi-mortarboard", 
-        "title": "Thesis & Dissertation Writing", 
-        "desc": "Expert drafting and structural guidance for Undergraduate, Master’s, and Doctoral theses, focusing on rigorous research, logical flow, and academic integrity."
-    },
-    {
-        "icon": "bi-pen-fill", 
-        "title": "Academic Essay Writing", 
-        "desc": "Crafting persuasive, well-researched, and articulately composed essays across various disciplines, adhering to strict stylistic and argumentative standards."
-    },
-    {
-        "icon": "bi-clipboard-check", 
-        "title": "Research Proposal Writing", 
-        "desc": "Developing compelling research proposals that clearly articulate objectives, significance, and methodology to secure institutional approval or project funding."
-    },
-    {
-        "icon": "bi-pencil-square", 
-        "title": "Structural Editing", 
-        "desc": "Refining sentence architecture, enhancing vocabulary, and establishing an authoritative academic voice that commands respect in scholarly circles."
-    },
-    {
-        "icon": "bi-file-earmark-ruled", 
-        "title": "Precision Formatting", 
-        "desc": "Mastery of APA, MLA, Harvard, Chicago, and Vancouver styles. We ensure every citation, margin, and reference is mathematically flawless."
-    },
-    {
-        "icon": "bi-lightbulb", 
-        "title": "Methodology Consultation", 
-        "desc": "Strategic guidance on research design, helping you select, justify, and articulate your qualitative or quantitative framework with academic rigor."
-    },
-    {
-        "icon": "bi-journal-richtext", 
-        "title": "Literature Synthesis", 
-        "desc": "Transforming fragmented sources into a cohesive and powerful narrative that effectively highlights critical research gaps and justifies your study."
-    },
-    {
-        "icon": "bi-bar-chart-line", 
-        "title": "Data Analysis & Presentation", 
-        "desc": "Enhancing the visual and descriptive presentation of your findings, making complex statistical data comprehensible, impactful, and clear."
-    },
-    {
-        "icon": "bi-shield-check", 
-        "title": "Plagiarism & Integrity Review", 
-        "desc": "Comprehensive originality reports and detailed academic integrity checks to guarantee your work is 100% unique and ethically sound."
+    <style>
+    /* Gradient Title */
+    .page-title {
+        font-size: 3rem;
+        font-weight: 800;
+        background: -webkit-linear-gradient(45deg, #ff6a00, #ee0979);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-align: center;
+        margin-bottom: 10px;
     }
-]
+    
+    .page-subtitle {
+        text-align: center;
+        color: #666;
+        font-size: 1.2rem;
+        margin-bottom: 40px;
+    }
 
-# Displaying Services in a Responsive Grid (2 columns for better readability of descriptions)
-cols = st.columns(2)
-for i, s in enumerate(services):
-    with cols[i % 2]:
-        st.markdown(f"""
-        <div class="pro-card">
-            <div class="icon-box"><i class="bi {s['icon']}"></i></div>
-            <h3 style="margin-top: 0; color: var(--primary); font-weight: 700;">{s['title']}</h3>
-            <p style="margin-bottom: 0; line-height: 1.6;">{s['desc']}</p>
-        </div><br>
-        """, unsafe_allow_html=True)
+    /* Service Cards Styling */
+    .service-card {
+        background-color: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        border-left: 6px solid #667eea;
+        transition: all 0.3s ease-in-out;
+        margin-bottom: 20px;
+        height: 220px;
+    }
+    
+    /* Hover Effect (Bubble up & Glow) */
+    .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(102, 126, 234, 0.2);
+        border-left: 6px solid #ee0979;
+    }
 
-# Call to Action Footer
-st.markdown("---")
-st.markdown("""
-<div style="text-align: center; padding: 20px;">
-    <h3 style="color: var(--primary);">Ready to excel in your academic journey?</h3>
-    <p style="color: var(--text-light); margin-bottom: 30px;">Our consultants are available 24/7 to discuss your project requirements.</p>
-</div>
+    .service-icon {
+        font-size: 35px;
+        margin-bottom: 15px;
+    }
+
+    .service-title {
+        color: #2c3e50;
+        font-size: 22px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .service-desc {
+        color: #555;
+        font-size: 15px;
+        line-height: 1.5;
+    }
+
+    /* CTA Button Styling */
+    div.stButton > button {
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        color: white !important;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 30px;
+        border: none;
+        padding: 10px 30px;
+        display: block;
+        margin: 0 auto;
+        transition: all 0.3s ease;
+    }
+    
+    div.stButton > button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(30, 60, 114, 0.4);
+    }
+    </style>
 """, unsafe_allow_html=True)
 
-c1, c2, c3 = st.columns([1,1,1])
+# 3. Header Section
+st.markdown("<h1 class='page-title'>What We Offer 🎯</h1>", unsafe_allow_html=True)
+st.markdown("<p class='page-subtitle'>Premium writing solutions designed to elevate your brand and academic success.</p>", unsafe_allow_html=True)
+
+st.write("---")
+
+# 4. Services Grid (3x2 Layout)
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.markdown("""
+        <div class='service-card'>
+            <div class='service-icon'>📝</div>
+            <div class='service-title'>Content Writing</div>
+            <div class='service-desc'>Engaging blog posts, articles, and website content optimized for SEO and readability.</div>
+        </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("""
+        <div class='service-card'>
+            <div class='service-icon'>��</div>
+            <div class='service-title'>Academic Writing</div>
+            <div class='service-desc'>Well-researched essays, assignments, and research papers with perfect citations.</div>
+        </div>
+    """, unsafe_allow_html=True)
+
 with col2:
-    if st.button("🚀 Get a Custom Quote", use_container_width=True):
-        st.switch_page("pages/6_Get_a_Quote.py")
+    st.markdown("""
+        <div class='service-card'>
+            <div class='service-icon'>💡</div>
+            <div class='service-title'>Copywriting</div>
+            <div class='service-desc'>Persuasive sales copy, ad scripts, and landing pages that convert visitors into customers.</div>
+        </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("""
+        <div class='service-card'>
+            <div class='service-icon'>🔍</div>
+            <div class='service-title'>Proofreading</div>
+            <div class='service-desc'>Meticulous editing to ensure your documents are grammar-free and flow perfectly.</div>
+        </div>
+    """, unsafe_allow_html=True)
+
+with col3:
+    st.markdown("""
+        <div class='service-card'>
+            <div class='service-icon'>📄</div>
+            <div class='service-title'>Resume & Cover Letters</div>
+            <div class='service-desc'>Professional resumes and cover letters designed to land you your dream job.</div>
+        </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("""
+        <div class='service-card'>
+            <div class='service-icon'>🎨</div>
+            <div class='service-title'>Creative Writing</div>
+            <div class='service-desc'>Captivating stories, scripts, and creative pieces that leave a lasting impact.</div>
+        </div>
+    """, unsafe_allow_html=True)
+
+st.write("")
+st.write("")
+st.write("---")
+
+# 5. Call to Action (CTA)
+st.markdown("<h3 style='text-align: center; color: #2c3e50;'>Ready to start your project? 🚀</h3>", unsafe_allow_html=True)
+
+col_empty1, col_btn, col_empty2 = st.columns([1, 1, 1])
+with col_btn:
+    if st.button("Get a Free Quote Now"):
+        st.switch_page("pages/3_Get_a_Quote.py")
