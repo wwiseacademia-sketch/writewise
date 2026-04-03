@@ -3,44 +3,44 @@ import urllib.parse
 import streamlit.components.v1 as components
 
 # ===================== PAGE CONFIG =====================
-st.set_page_config(page_title="WriteWise | Academic Excellence", page_icon="🏛️", layout="wide", initial_sidebar_state="collapsed")
+st.set_page_config(page_title="WriteWise | Elite Academic Services", page_icon="✨", layout="wide", initial_sidebar_state="collapsed")
 
-# ===================== CORPORATE PRO CSS =====================
+# ===================== VIBRANT TECH PRO CSS =====================
 st.markdown("""
 <style>
+/* 1. Import Bootstrap Icons & Premium Font */
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 html, body, [class*="css"] {
     font-family: 'Inter', sans-serif !important;
 }
 
+/* 2. Define Vibrant Color Palette */
 :root {
-    --primary: #0F172A; 
-    --secondary: #2563EB; 
-    --accent: #F59E0B; 
-    --bg-color: #F8FAFC; 
+    --primary: #042f2e; /* Deep Teal */
+    --secondary: #0d9488; /* Vibrant Teal */
+    --accent: #a3e635; /* Lime Green - Pops well! */
+    --bg-color: #f0fdfa; /* Very light mint background */
     --surface: #FFFFFF;
-    --text-main: #1E293B;
-    --text-light: #64748B;
-    --border-color: #E2E8F0;
-    --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
-    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
-    --radius: 12px; 
+    --text-main: #064e3b; /* Dark Greenish Text */
+    --text-light: #52525B;
+    --border-color: #d1d5db;
+    --radius: 12px;
 }
 
-/* Hide Default Streamlit Elements */
+/* 3. Hide Default Streamlit Elements */
 header {visibility: hidden;}
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
 
-/* Base App Styling */
+/* --- Base App Styling --- */
 .stApp {
     background-color: var(--bg-color);
     color: var(--text-main);
 }
 
-/* --- INTERACTIVE TABS --- */
+/* --- TABS with Vibrant Accent --- */
 .stTabs [data-baseweb="tab-list"] {
     gap: 8px;
     padding: 10px 20px 0 20px;
@@ -53,97 +53,63 @@ footer {visibility: hidden;}
     color: var(--text-light);
     padding: 12px 24px;
     border-radius: var(--radius) var(--radius) 0 0;
-    background-color: transparent;
-    border: none;
     transition: all 0.2s ease;
 }
 .stTabs [data-baseweb="tab"]:hover {
     color: var(--secondary);
-    background-color: #EFF6FF;
+    background-color: #ccfbf1;
 }
 .stTabs [data-baseweb="tab"][aria-selected="true"] {
     color: var(--primary);
-    background-color: var(--surface);
-    border-top: 3px solid var(--secondary);
-    border-left: 1px solid var(--border-color);
-    border-right: 1px solid var(--border-color);
-    border-bottom: none;
-    box-shadow: var(--shadow-sm);
+    border-bottom: 3px solid var(--secondary);
 }
 
-/* --- HERO SECTION --- */
+/* --- HERO SECTION with Gradient Text --- */
 .hero-wrapper {
-    background: linear-gradient(135deg, var(--primary) 0%, #1E293B 100%);
-    color: white;
-    padding: 80px 20px;
-    border-radius: var(--radius);
     text-align: center;
-    margin: 20px 0 40px 0;
-    box-shadow: var(--shadow-lg);
-    position: relative;
-    overflow: hidden;
-}
-.hero-badge {
-    display: inline-block;
-    background: rgba(37, 99, 235, 0.2);
-    color: #60A5FA;
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    border: 1px solid rgba(37, 99, 235, 0.3);
+    padding: 80px 20px;
+    margin: 20px 0;
 }
 .hero-title {
-    font-size: 4rem;
+    font-size: 4.5rem;
     font-weight: 800;
     line-height: 1.1;
     margin-bottom: 20px;
-    letter-spacing: -1px;
+    letter-spacing: -1.5px;
+    color: var(--primary);
 }
-.hero-title span { color: var(--secondary); }
+.hero-title .gradient-text {
+    background: linear-gradient(135deg, var(--secondary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 .hero-subtitle {
-    font-size: 1.2rem;
-    color: #CBD5E1;
+    font-size: 1.25rem;
+    color: var(--text-light);
     max-width: 800px;
     margin: 0 auto 40px auto;
-    line-height: 1.6;
 }
 
-/* --- BUTTONS --- */
-.btn-primary {
-    background-color: var(--secondary);
+/* --- BUTTONS with Gradient and Hover Effect --- */
+.btn-gradient {
+    background: linear-gradient(135deg, var(--secondary), #059669);
     color: white !important;
     padding: 14px 32px;
     border-radius: 8px;
     font-weight: 600;
     font-size: 1.1rem;
     text-decoration: none;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     display: inline-block;
-    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.25);
+    border: none;
+    box-shadow: 0 4px 15px rgba(13, 148, 136, 0.3);
 }
-.btn-primary:hover {
-    background-color: #1D4ED8;
-    transform: translateY(-2px);
-}
-.btn-outline {
-    background-color: transparent;
-    color: white !important;
-    padding: 14px 32px;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 1.1rem;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    display: inline-block;
-    border: 2px solid rgba(255,255,255,0.3);
-    margin-left: 15px;
+.btn-gradient:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(13, 148, 136, 0.4);
 }
 
-/* --- SERVICES CARDS --- */
+/* --- SERVICE CARDS with Professional Icons --- */
 .section-header {
     text-align: center;
     margin: 60px 0 40px 0;
@@ -152,11 +118,6 @@ footer {visibility: hidden;}
     font-size: 2.5rem;
     font-weight: 800;
     color: var(--primary);
-    margin-bottom: 10px;
-}
-.section-header p {
-    font-size: 1.1rem;
-    color: var(--text-light);
 }
 .service-grid {
     display: grid;
@@ -169,23 +130,15 @@ footer {visibility: hidden;}
     border-radius: var(--radius);
     padding: 32px;
     transition: all 0.3s ease;
-    box-shadow: var(--shadow-sm);
 }
 .service-card:hover {
     transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-    border-color: #BFDBFE;
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07);
+    border-color: var(--secondary);
 }
 .service-icon {
-    font-size: 2rem;
+    font-size: 2.5rem; /* Icon size */
     color: var(--secondary);
-    background: #EFF6FF;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 12px;
     margin-bottom: 20px;
 }
 .service-card h3 {
@@ -196,15 +149,11 @@ footer {visibility: hidden;}
 }
 .service-card p {
     color: var(--text-light);
-    line-height: 1.6;
     font-size: 0.95rem;
 }
 
-/* --- TEAM SECTION --- */
-.team-container {
-    max-width: 900px;
-    margin: 0 auto;
-}
+/* --- TEAM SECTION STYLING --- */
+.team-container { max-width: 900px; margin: 0 auto; }
 .team-member {
     display: flex;
     align-items: center;
@@ -213,12 +162,6 @@ footer {visibility: hidden;}
     border-radius: var(--radius);
     padding: 30px;
     margin-bottom: 20px;
-    box-shadow: var(--shadow-sm);
-    transition: all 0.2s ease;
-}
-.team-member:hover {
-    box-shadow: var(--shadow-md);
-    border-left: 4px solid var(--secondary);
 }
 .team-img {
     width: 120px;
@@ -226,11 +169,9 @@ footer {visibility: hidden;}
     border-radius: 50%;
     object-fit: cover;
     margin-right: 30px;
-    border: 3px solid #EFF6FF;
 }
-.team-info h3 { font-size: 1.4rem; font-weight: 700; color: var(--primary); margin: 0 0 5px 0;}
-.team-role { color: var(--secondary); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;}
-.team-desc { color: var(--text-light); line-height: 1.6; margin:0;}
+.team-info h3 { font-size: 1.4rem; font-weight: 700; color: var(--primary); }
+.team-role { color: var(--secondary); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 
 /* --- FORM STYLING --- */
 div[data-testid="stForm"] {
@@ -240,10 +181,9 @@ div[data-testid="stForm"] {
     border: 1px solid var(--border-color) !important;
     border-radius: var(--radius) !important;
     padding: 40px !important;
-    box-shadow: var(--shadow-md) !important;
 }
 
-/* --- FLOATING WHATSAPP --- */
+/* --- WHATSAPP BUTTON --- */
 .wa-btn {
     position: fixed;
     bottom: 30px;
@@ -257,12 +197,10 @@ div[data-testid="stForm"] {
     align-items: center;
     justify-content: center;
     font-size: 32px;
-    box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
     z-index: 1000;
     transition: transform 0.2s ease;
     text-decoration: none;
 }
-.wa-btn:hover { transform: scale(1.1); }
 </style>
 """, unsafe_allow_html=True)
 
@@ -273,68 +211,64 @@ base_wa_link = f"https://wa.me/{phone}?text="
 st.markdown(f'<a href="{base_wa_link}Hello WriteWise, I need a consultation." class="wa-btn" target="_blank">💬</a>', unsafe_allow_html=True)
 
 # ===================== TABS =====================
-tab1, tab2, tab3 = st.tabs(["🏛️ Home & Services", "👥 Our Experts", "📝 Request Proposal"])
+tab1, tab2, tab3 = st.tabs(["🏠 Home & Services", "👥 Our Experts", "📝 Request a Quote"])
 
 # ----------------- TAB 1: HOME & SERVICES -----------------
 with tab1:
     st.markdown(f"""
     <div class="hero-wrapper">
-        <div class="hero-badge">Global Academic Consulting</div>
-        <h1 class="hero-title">Elevating Academic <span>Standards.</span></h1>
-        <p class="hero-subtitle">Rigorous structural editing, precise formatting, and expert methodology consultation for researchers worldwide. Strict confidentiality guaranteed.</p>
-        <a href="{base_wa_link}I would like to discuss my academic requirements." class="btn-primary" target="_blank">Consult an Expert</a>
-        <a href="mailto:info@writewise.com" class="btn-outline">Email Us</a>
+        <h1 class="hero-title">Your Research, <br><span class="gradient-text">Perfected.</span></h1>
+        <p class="hero-subtitle">We provide elite structural editing, flawless formatting, and strategic methodology guidance for academics and researchers across the globe. Confidential, professional, and precise.</p>
+        <a href="{base_wa_link}I'd like to discuss my project." class="btn-gradient" target="_blank">Start Your Project Today</a>
     </div>
     
     <div class="section-header">
         <h2>Core Competencies</h2>
-        <p>Specialized academic services tailored to elite university guidelines.</p>
     </div>
     
     <div class="service-grid">
         <div class="service-card">
-            <div class="service-icon">✒️</div>
+            <div class="service-icon"><i class="bi bi-pencil-square"></i></div>
             <h3>Structural Editing</h3>
-            <p>We refine sentence flow, correct academic tone, and ensure logical progression throughout your manuscript.</p>
+            <p>Enhancing clarity, flow, and academic tone. We go beyond grammar to refine the core architecture of your manuscript.</p>
         </div>
         <div class="service-card">
-            <div class="service-icon">📑</div>
+            <div class="service-icon"><i class="bi bi-file-earmark-ruled"></i></div>
             <h3>Precision Formatting</h3>
-            <p>Flawless implementation of APA, MLA, Harvard, or Chicago styles. We handle complex citations expertly.</p>
+            <p>Mastery of APA, MLA, Harvard, and Chicago styles. We ensure every citation and margin is flawlessly aligned.</p>
         </div>
         <div class="service-card">
-            <div class="service-icon">🔬</div>
+            <div class="service-icon"><i class="bi bi-lightbulb"></i></div>
             <h3>Methodology Design</h3>
-            <p>Expert guidance on research design. We help justify your qualitative or quantitative approach rigorously.</p>
+            <p>Expert consultation to help you select, justify, and articulate your research framework with academic authority.</p>
         </div>
         <div class="service-card">
-            <div class="service-icon">📚</div>
+            <div class="service-icon"><i class="bi bi-journal-richtext"></i></div>
             <h3>Literature Synthesis</h3>
-            <p>Organizing scattered literature into a cohesive narrative, identifying clear research gaps to strengthen your thesis.</p>
+            <p>We help you weave disparate sources into a compelling narrative that effectively highlights critical research gaps.</p>
         </div>
         <div class="service-card">
-            <div class="service-icon">📊</div>
+            <div class="service-icon"><i class="bi bi-bar-chart-line"></i></div>
             <h3>Data Presentation</h3>
-            <p>Transforming complex datasets into clear narratives. Ensuring your findings are communicated effectively.</p>
+            <p>Clarity in communication. We refine the presentation of your findings, making complex data easy to understand.</p>
         </div>
         <div class="service-card">
-            <div class="service-icon">🛡️</div>
-            <h3>Integrity Checks</h3>
-            <p>Comprehensive reviews to ensure your work is entirely original and adheres to strict academic policies.</p>
+            <div class="service-icon"><i class="bi bi-shield-check"></i></div>
+            <h3>Integrity & Originality</h3>
+            <p>Rigorous checks to guarantee your work is 100% original and upholds the highest standards of academic integrity.</p>
         </div>
     </div>
     """, unsafe_allow_html=True)
 
-# ----------------- TAB 2: OUR EXPERTS (FIXED LEAKAGE) -----------------
+# ----------------- TAB 2: OUR EXPERTS -----------------
 with tab2:
     st.markdown("""
     <div class="section-header">
-        <h2>The Consulting Team</h2>
-        <p>Your work is reviewed by subject-matter experts and seasoned academics.</p>
+        <h2>Meet The Consulting Team</h2>
     </div>
     """, unsafe_allow_html=True)
     
-    # HTML block for team member 1
+    # HTML blocks for each team member
     st.markdown("""
     <div class="team-container">
         <div class="team-member">
@@ -342,13 +276,11 @@ with tab2:
             <div class="team-info">
                 <h3>Dr. Sarah Khan</h3>
                 <div class="team-role">Director of Research Methodology</div>
-                <p class="team-desc">Ph.D. in Social Sciences. With over 12 years of experience in academia, Dr. Khan specializes in structuring complex research frameworks and guiding methodologies.</p>
+                <p>Ph.D. in Social Sciences. Dr. Khan specializes in structuring complex research frameworks and guiding quantitative methodologies.</p>
             </div>
         </div>
     </div>
     """, unsafe_allow_html=True)
-
-    # HTML block for team member 2
     st.markdown("""
     <div class="team-container">
         <div class="team-member">
@@ -356,13 +288,11 @@ with tab2:
             <div class="team-info">
                 <h3>Prof. Ali Raza</h3>
                 <div class="team-role">Head of Editorial Services</div>
-                <p class="team-desc">A veteran in academic publishing, Prof. Raza has edited over 800+ manuscripts. He is an absolute authority on APA 7th Edition and Harvard referencing systems.</p>
+                <p>A veteran in academic publishing with 800+ edited manuscripts. Absolute authority on APA 7th Edition and Harvard systems.</p>
             </div>
         </div>
     </div>
     """, unsafe_allow_html=True)
-
-    # HTML block for team member 3
     st.markdown("""
     <div class="team-container">
         <div class="team-member">
@@ -370,47 +300,38 @@ with tab2:
             <div class="team-info">
                 <h3>Aisha Malik, M.Phil</h3>
                 <div class="team-role">Quality Assurance Lead</div>
-                <p class="team-desc">Holding an M.Phil in Literature, Aisha ensures that every manuscript meets the strict linguistic and structural standards of elite universities.</p>
+                <p>The final checkpoint. Aisha ensures every manuscript meets the stringent linguistic and structural standards of top-tier universities.</p>
             </div>
         </div>
     </div>
     """, unsafe_allow_html=True)
 
-# ----------------- TAB 3: REQUEST PROPOSAL (FORM) -----------------
+# ----------------- TAB 3: REQUEST A QUOTE -----------------
 with tab3:
     st.markdown("""
     <div class="section-header">
         <h2>Request a Custom Proposal</h2>
-        <p>Provide your project details to connect directly via WhatsApp.</p>
     </div>
     """, unsafe_allow_html=True)
     
     with st.form("quote_form"):
         col1, col2 = st.columns(2)
         with col1:
-            name = st.text_input("Name / Alias")
-            academic_level = st.selectbox("Academic Level", ["Undergraduate", "Master's", "Ph.D.", "Post-Doc"])
+            name = st.text_input("Name")
+            level = st.selectbox("Academic Level", ["Undergraduate", "Master's", "Ph.D.", "Post-Doc"])
         with col2:
-            service_needed = st.selectbox("Primary Service Needed", ["Structural Editing", "Formatting", "Methodology Guidance", "Full Package"])
-            word_count = st.number_input("Approximate Word Count", min_value=0, step=500, value=2000)
+            service = st.selectbox("Primary Service", ["Structural Editing", "Formatting", "Methodology Guidance", "Full Package"])
+            words = st.number_input("Word Count", min_value=0, step=500, value=2000)
         
-        urgency = st.radio("Required Timeline", ["Standard (7+ Days)", "Urgent (3-5 Days)", "Express (24-48 Hours)"], horizontal=True)
-        notes = st.text_area("Briefly describe your requirements")
+        urgency = st.radio("Timeline", ["Standard (7+ Days)", "Urgent (3-5 Days)", "Express (24-48 Hours)"], horizontal=True)
+        notes = st.text_area("Project details or specific challenges")
         
         st.write("")
         submit = st.form_submit_button("Submit Request via WhatsApp", use_container_width=True)
         
         if submit:
-            msg = f"Hello WriteWise,\n\n"
-            if name: msg += f"*Name:* {name}\n"
-            msg += f"*Level:* {academic_level}\n"
-            msg += f"*Service:* {service_needed}\n"
-            msg += f"*Words:* {word_count}\n"
-            msg += f"*Timeline:* {urgency}\n"
-            if notes: msg += f"\n*Notes:* {notes}"
-            
+            msg = f"Hello WriteWise,\n\n*Name:* {name}\n*Level:* {level}\n*Service:* {service}\n*Words:* {words}\n*Timeline:* {urgency}\n\n*Notes:* {notes}"
             link = base_wa_link + urllib.parse.quote(msg)
-            # Open WhatsApp link
             js = f"window.open('{link}', '_blank');"
             components.html(f"<script>{js}</script>", height=0, width=0)
             st.success("✅ Request processed! [Click Here if WhatsApp didn't open automatically](" + link + ")")
@@ -418,8 +339,7 @@ with tab3:
 # ===================== FOOTER =====================
 st.markdown("""
 <div style="text-align: center; padding: 40px; margin-top: 60px; border-top: 1px solid var(--border-color); color: var(--text-light);">
-    <h4 style="color: var(--primary); font-weight: 700; margin-bottom: 5px;">WriteWise Consulting</h4>
-    <p>Ethical Academic Support • 100% Confidential • Professional Excellence</p>
-    <p style="font-size: 0.85rem; margin-top: 20px;">© 2026 WriteWise Academic Consulting. All rights reserved.</p>
+    <h4 style="color: var(--primary); font-weight: 700;">WriteWise</h4>
+    <p>© 2026 WriteWise Academic Services. All rights reserved.</p>
 </div>
 """, unsafe_allow_html=True)
