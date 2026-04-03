@@ -1,114 +1,47 @@
 import streamlit as st
-import urllib.parse
 
-PHONE = "923007354339"
-
-def apply_theme(page_title: str = "WriteWise Academic Help"):
-    st.set_page_config(page_title=page_title, layout="wide")
-
-    wa_link = "https://wa.me/" + PHONE + "?text=" + urllib.parse.quote(
-        "Hello WriteWise Academic Help, I need a quote."
-    )
-
+def apply_pro_theme():
     st.markdown("""
     <style>
-    :root{
-      --bg:#f6f9fc;
-      --surface:#ffffff;
-      --text:#0b1220;
-      --muted:#5b6472;
-      --emerald:#0f766e;
-      --emerald-dark:#065f46;
-      --gold:#d4af37;
-      --shadow:0 10px 30px rgba(0,0,0,0.08);
+    /* Professional Fonts & Icons */
+    @import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+    html, body, [class*="css"] { font-family: 'Inter', sans-serif !important; }
+
+    :root {
+        --primary: #042f2e; --secondary: #0d9488; --accent: #a3e635;
+        --bg-color: #f0fdfa; --surface: #FFFFFF; --text-main: #064e3b;
+        --text-light: #52525B; --border-color: #d1d5db; --radius: 16px;
     }
 
-    .stApp{
-      background:linear-gradient(180deg,var(--bg) 0%, #ffffff 60%, var(--bg) 100%);
-      color:var(--text);
-    }
-    .block-container{ max-width:1150px; padding-top:1.4rem; }
+    .stApp { background-color: var(--bg-color); color: var(--text-main); }
 
-    h1,h2,h3,h4,p,li,div { color: var(--text); }
-    [data-testid="stCaptionContainer"] { color: var(--muted) !important; }
-
-    /* Cards */
-    .card{
-      background:var(--surface);
-      border-radius:18px;
-      padding:18px;
-      box-shadow:var(--shadow);
-      border:1px solid rgba(0,0,0,0.05);
-    }
-    .hero{
-      background:linear-gradient(135deg, rgba(15,118,110,0.12), rgba(212,175,55,0.10));
-      border-radius:20px;
-      padding:25px;
-      box-shadow:var(--shadow);
-    }
-    .why-card{
-      background:#ffffff;
-      border-radius:16px;
-      padding:14px;
-      border-left:5px solid var(--emerald);
-      box-shadow:var(--shadow);
-      font-weight:600;
+    /* Custom Navbar/Header Style */
+    .header-box { text-align: center; padding: 40px 20px; margin-bottom: 30px; }
+    .gradient-text {
+        background: linear-gradient(135deg, var(--secondary), var(--accent));
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        font-weight: 800;
     }
 
-    /* Buttons */
-    .stLinkButton a{
-      background:linear-gradient(135deg,var(--emerald),var(--emerald-dark)) !important;
-      color:white !important;
-      font-weight:800 !important;
-      border-radius:12px !important;
-      padding:10px 18px !important;
-      border:none !important;
+    /* Professional Cards */
+    .pro-card {
+        background: var(--surface); border: 1px solid var(--border-color);
+        border-radius: var(--radius); padding: 30px; transition: all 0.3s ease;
+        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
     }
-    .stButton > button{
-      border-radius:12px !important;
-      font-weight:800 !important;
-    }
+    .pro-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-color: var(--secondary); }
 
-    /* Sidebar */
-    section[data-testid="stSidebar"]{
-      background:rgba(255,255,255,0.92) !important;
-      border-right:1px solid rgba(0,0,0,0.08) !important;
+    /* Gradient Buttons */
+    .stButton>button {
+        background: linear-gradient(135deg, var(--secondary), #059669) !important;
+        color: white !important; font-weight: 700 !important; border-radius: 10px !important;
+        border: none !important; padding: 10px 25px !important; transition: 0.3s !important;
     }
+    .stButton>button:hover { transform: scale(1.03); box-shadow: 0 10px 20px rgba(13, 148, 136, 0.3); }
 
-    /* Floating WhatsApp */
-    .whatsapp-float{
-      position:fixed;
-      bottom:20px;
-      right:20px;
-      background:var(--emerald);
-      color:white;
-      padding:14px 18px;
-      border-radius:50px;
-      font-weight:800;
-      box-shadow:0 8px 25px rgba(0,0,0,0.25);
-      text-decoration:none;
-      z-index:999;
-    }
-
-    .footer{
-      margin-top:35px;
-      opacity:0.85;
-      font-size:0.95rem;
-    }
+    /* Icons Styling */
+    .icon-box { font-size: 2.5rem; color: var(--secondary); margin-bottom: 15px; }
     </style>
-    """, unsafe_allow_html=True)
-
-    # Floating WhatsApp button on every page
-    st.markdown(
-        f'<a class="whatsapp-float" href="{wa_link}" target="_blank">Chat on WhatsApp</a>',
-        unsafe_allow_html=True
-    )
-
-def footer():
-    st.markdown("""
-    <div class="footer">
-      <strong>WriteWise Academic Help</strong><br>
-      WhatsApp: <strong>+92 300 7354339</strong><br>
-      Worldwide / Remote Services • Free revisions within 14 days • Response within 24 hours
-    </div>
     """, unsafe_allow_html=True)
